@@ -1,0 +1,36 @@
+name: metadata_god
+description: A new Flutter project.
+version: 0.0.1
+homepage: A nice dream
+
+environment:
+  sdk: ">=2.14.0 <3.0.0"
+  flutter: ">=2.5.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_rust_bridge: ^1.41.3
+  ffi: ^2.0.1
+  plugin_platform_interface: ^2.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  ffigen: ^6.1.2
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.krtirtho.metadata_god
+        pluginClass: MetadataGodPlugin
+      ios:
+        pluginClass: MetadataGodPlugin
+      linux:
+        pluginClass: MetadataGodPlugin
+      macos:
+        pluginClass: MetadataGodPlugin
+      windows:
+        pluginClass: MetadataGodPluginCApi
