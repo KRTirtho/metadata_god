@@ -5,6 +5,15 @@ import 'package:metadata_god/ffi.dart';
 class MetadataGod {
   static Future<Metadata?> getMetadata(File file) async {
     if (!await file.exists()) return null;
-    return await api.buildMetadata(file: file.path);
+    return await api.readMetadata(file: file.path);
+  }
+
+  static Future<void> writeMetadata(File file, Metadata metadata) async {
+    if (!await file.exists()) return;
+    return await api.writeMetadata(file: file.path, metadata: metadata);
+  }
+
+  static Future<String> ping() async {
+    return await api.ping();
   }
 }

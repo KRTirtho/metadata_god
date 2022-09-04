@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:metadata_god/ffi.dart';
 import 'package:metadata_god/metadata_god.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() {
   runApp(const MyApp());
@@ -43,12 +45,39 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
+    final file = File(Platform.isAndroid
+        ? "/storage/emulated/0/Download/Spotube/shyaway.m4a"
+        : "/home/krtirtho/Downloads/Spotube/shyaway.m4a");
     super.initState();
-    MetadataGod.getMetadata(
-      File("/home/krtirtho/Music/houseofgold.mp3"),
-    ).then((value) {
-      final v = value;
-    });
+    () async {
+      MetadataGod.ping().then((ping) => print("PING: $ping"));
+      final hasStorageAccess =
+          Platform.isAndroid ? await Permission.storage.isGranted : true;
+      if (!hasStorageAccess) return;
+      await file.writeAsBytes(await file.readAsBytes());
+      MetadataGod.getMetadata(file).then((value) {
+        final v = value;
+        if (v == null) return;
+        MetadataGod.writeMetadata(
+          file,
+          Metadata(
+            title: v.title,
+            artist: v.artist,
+            album: v.album,
+            genre: "Alternative Rock",
+            year: DateTime.now().year,
+            albumArtist: v.albumArtist,
+            trackNumber: v.trackNumber,
+            trackTotal: v.trackTotal,
+            discNumber: v.discNumber,
+            discTotal: v.discTotal,
+            durationMs: v.durationMs,
+            fileSize: Random().nextInt(100000),
+            picture: v.picture,
+          ),
+        );
+      });
+    }();
   }
 
   @override

@@ -15,6 +15,11 @@ build-windows:
 build-macos:
       export REPO_DIR="$PWD"; cd "$PWD/rust"; cargo build --release; cp "$REPO_DIR/rust/target/release/rust.dylib" "$REPO_DIR/macos/Libs"
 
+# build-android:
+#       export REPO_DIR="$PWD"; cd "$PWD/rust"; cargo build --release --target aarch64-linux-android;cargo build --release --target armv7-linux-androideabi; cp "$REPO_DIR/rust/target/aarch64-linux-android/release/librust.so" "$REPO_DIR/android/src/main/jniLibs/arm64-v8a"; cp "$REPO_DIR/rust/target/armv7-linux-androideabi/release/librust.so" "$REPO_DIR/android/src/main/jniLibs/armeabi-v7a"
+build-android:
+      cd rust; cargo ndk -t armeabi-v7a -t arm64-v8a -t x86_64 -t x86 -o ../android/src/main/jniLibs build --release
+
 lint:
     cd rust && cargo fmt
     dart format .
