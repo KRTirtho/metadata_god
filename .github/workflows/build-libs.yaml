@@ -1,8 +1,5 @@
 name: Build Dynamic Libraries
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
