@@ -1,6 +1,7 @@
 import 'dart:io';
 
-import 'package:metadata_god/ffi.dart';
+import 'package:metadata_god/src/ffi.dart';
+export 'package:metadata_god/src/bridge_generated.dart' show Metadata, Image;
 
 class MetadataGod {
   static Future<Metadata?> getMetadata(File file) async {
