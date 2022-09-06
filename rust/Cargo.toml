@@ -16,3 +16,9 @@ path = "src/main.rs"
 flutter_rust_bridge = "1"
 anyhow = "1"
 audiotags = "0.4.1"
+
+[profile.release]
+strip = true
+opt-level = "s"
+lto = true
+codegen-units = 1
