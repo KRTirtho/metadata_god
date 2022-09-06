@@ -8,7 +8,7 @@ const base = 'rust';
 DynamicLibrary platformSpecificDynamicLib() {
   switch (Platform.operatingSystem) {
     case 'linux':
-      return DynamicLibrary.open('lib$base.a');
+      return DynamicLibrary.open('lib$base.so');
     case 'android':
       return DynamicLibrary.open('lib$base.so');
     case 'macos':
