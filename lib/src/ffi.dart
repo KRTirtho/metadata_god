@@ -8,9 +8,7 @@ const base = 'rust';
 DynamicLibrary platformSpecificDynamicLib() {
   switch (Platform.operatingSystem) {
     case 'linux':
-      return DynamicLibrary.open(
-        '${Directory.current.path}/linux/flutter/ephemeral/.plugin_symlinks/metadata_god/lib/shared/linux/librust.so',
-      );
+      return DynamicLibrary.open('lib$base.so');
     case 'android':
       return DynamicLibrary.open('lib$base.so');
     case 'macos':
