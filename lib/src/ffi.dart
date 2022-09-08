@@ -9,7 +9,8 @@ DynamicLibrary platformSpecificDynamicLib() {
   switch (Platform.operatingSystem) {
     case 'linux':
       return DynamicLibrary.open(
-          '${File(Platform.resolvedExecutable).parent.path}/lib/librust.so');
+        '${Directory.current.path}/linux/flutter/ephemeral/.plugin_symlinks/metadata_god/lib/shared/linux/librust.so',
+      );
     case 'android':
       return DynamicLibrary.open('lib$base.so');
     case 'macos':
