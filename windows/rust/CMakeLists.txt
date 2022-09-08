@@ -1,5 +1,6 @@
-
-include(../../cmake/rust.cmake)
+add_library(${CRATE_NAME} SHARED IMPORTED GLOBAL)
 
 set_property(TARGET ${CRATE_NAME} PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/rust.dll")
 set_property(TARGET ${CRATE_NAME} PROPERTY IMPORTED_IMPLIB "${CMAKE_CURRENT_SOURCE_DIR}/rust.lib")
+
+target_link_libraries(${PLUGIN_NAME} PRIVATE ${CRATE_NAME})
