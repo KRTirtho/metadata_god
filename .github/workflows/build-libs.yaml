@@ -27,13 +27,13 @@ jobs:
             rust/target/release/rust.dll
             rust/target/release/rust.lib
 
-  macos:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: |
-          cd rust && cargo build --release
-      - uses: actions/upload-artifact@v3
-        with:
-          name: RustLib
-          path: rust/target/release/librust.dylib
+  # macos:
+  #   runs-on: macos-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - run: |
+  #         cd rust && cargo build --release
+  #     - uses: actions/upload-artifact@v3
+  #       with:
+  #         name: RustLib
+  #         path: rust/target/release/librust.dylib

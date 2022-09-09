@@ -26,11 +26,11 @@ flutter:
       android:
         package: com.krtirtho.metadata_god
         pluginClass: MetadataGodPlugin
-      ios:
-        pluginClass: MetadataGodPlugin
+      # ios:
+      #   pluginClass: MetadataGodPlugin
       linux:
         pluginClass: MetadataGodPlugin
-      macos:
-        pluginClass: MetadataGodPlugin
+      # macos:
+      #   pluginClass: MetadataGodPlugin
       windows:
         pluginClass: MetadataGodPluginCApi
