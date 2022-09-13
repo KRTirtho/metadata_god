@@ -1,7 +1,7 @@
 name: metadata_god
-description: A new Flutter project.
-version: 0.0.1
-homepage: A nice dream
+description: Plugin for retrieving and writing audio tags/metadata from audio files
+version: 0.1.0
+homepage: https://github.com/KRTirtho/metadata_god
 
 environment:
   sdk: ">=2.14.0 <3.0.0"
@@ -26,11 +26,9 @@ flutter:
       android:
         package: com.krtirtho.metadata_god
         pluginClass: MetadataGodPlugin
-      # ios:
-      #   pluginClass: MetadataGodPlugin
       linux:
         pluginClass: MetadataGodPlugin
-      # macos:
-      #   pluginClass: MetadataGodPlugin
+      macos:
+        pluginClass: MetadataGodPlugin
       windows:
         pluginClass: MetadataGodPluginCApi
