@@ -29,6 +29,6 @@ flutter:
       linux:
         pluginClass: MetadataGodPlugin
       macos:
-        pluginClass: MetadataGodPlugin
+        dartPluginClass: MetadataGodPlugin
       windows:
         pluginClass: MetadataGodPluginCApi
