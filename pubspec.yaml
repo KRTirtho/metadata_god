@@ -12,7 +12,6 @@ dependencies:
     sdk: flutter
   flutter_rust_bridge: ^1.41.3
   ffi: ^2.0.1
-  plugin_platform_interface: ^2.0.2
 
 dev_dependencies:
   flutter_test:
@@ -29,6 +28,6 @@ flutter:
       linux:
         pluginClass: MetadataGodPlugin
       macos:
-        dartPluginClass: MetadataGodPlugin
+        dartPluginClass: MetadataGod
       windows:
         pluginClass: MetadataGodPluginCApi
