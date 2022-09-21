@@ -31,3 +31,6 @@ flutter:
         dartPluginClass: MetadataGod
       windows:
         pluginClass: MetadataGodPluginCApi
+      web:
+        fileName: metadata_god_web.dart
+        pluginClass: MetadataGod

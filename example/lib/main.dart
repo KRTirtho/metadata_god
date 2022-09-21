@@ -54,11 +54,11 @@ class _MyHomePageState extends State<MyHomePage> {
           Platform.isAndroid ? await Permission.storage.isGranted : true;
       if (!hasStorageAccess) return;
       await file.writeAsBytes(await file.readAsBytes());
-      MetadataGod.getMetadata(file).then((value) {
+      MetadataGod.getMetadata(file.path).then((value) {
         final v = value;
         if (v == null) return;
         MetadataGod.writeMetadata(
-          file,
+          file.path,
           Metadata(
             title: v.title,
             artist: v.artist,
