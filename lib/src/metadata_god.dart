@@ -7,12 +7,14 @@ import 'package:metadata_god/src/extensions/native_metadata.dart';
 class MetadataGod {
   static registerWith([dynamic _]) {}
 
+  /// Extracts metadata from a audio file and returns a [Metadata] object
   static Future<Metadata?> getMetadata(String path) async {
     final file = File(path);
     if (!await file.exists()) return null;
     return (await api.readMetadata(file: file.path)).toMetadata();
   }
 
+  /// Writes audio-tags or audio metadata to a supported audio file formate
   static Future<void> writeMetadata(String path, Metadata metadata) async {
     final file = File(path);
     if (!await file.exists()) return;

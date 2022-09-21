@@ -12,14 +12,7 @@ A flutter plugin for retrieving and writing audio tags/metadata from audio files
 
 ## Installation
 
-Add the following to your pubspec.yaml file:
-
-```yaml
-dependencies:
-  metadata_god: ^0.1.0
-```
-
-Or, run in terminal:
+Run in terminal:
 
 ```bash
 $ flutter pub add metadata_god
