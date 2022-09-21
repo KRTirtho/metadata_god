@@ -7,7 +7,7 @@
     objectVersion = 53;
     objects = {
 /* Begin PBXBuildFile section */
-        
+
                 CA602B8579AF1B886704EA40 /* Cargo.toml in Sources */ = {
                     isa = PBXBuildFile;
                     fileRef = CA609ACA6A7C3EF4668187A5 /* Cargo.toml */;
@@ -15,7 +15,7 @@
                         COMPILER_FLAGS = "--lib"; /* == OTHER_INPUT_FILE_FLAGS */
                     };
                 };
-                
+
                 CA602B8579AFF6C5F472C3B2 /* Cargo.toml in Sources */ = {
                     isa = PBXBuildFile;
                     fileRef = CA609ACA6A7C3EF4668187A5 /* Cargo.toml */;
@@ -23,7 +23,7 @@
                         COMPILER_FLAGS = "--lib"; /* == OTHER_INPUT_FILE_FLAGS */
                     };
                 };
-                
+
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -44,7 +44,7 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
-        
+
         CA600DA024A03C0BDCB816E1 /* staticlib */ = {
             isa = PBXFileReference;
             explicitFileType = "archive.ar";
@@ -56,7 +56,7 @@
             isa = PBXFileReference;
             explicitFileType = "compiled.mach-o.dylib";
             includeInIndex = 0;
-            name = "rust.dylib";
+            name = "librust.dylib";
             sourceTree = TARGET_BUILD_DIR;
         };
                 CA609ACA6A7C3EF4668187A5 /* Cargo.toml */ = {
@@ -72,7 +72,7 @@
                         isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition";
                         name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT;
                     };
-                
+
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -86,7 +86,7 @@
             sourceTree = "<group>";
         };
 
-        
+
                 ADDEDBA66A6E2 /* Required for static linking */ = {
                     isa = PBXGroup;
                     children = (
@@ -151,11 +151,11 @@ CA609ACA6A7C98AF0B5890DB,
             dependencies = (
             );
             name = "rust-cdylib";
-            productName = "rust.dylib";
+            productName = "librust.dylib";
             productReference = CA60131C3126F106A24E505E;
             productType = "com.apple.product-type.library.dynamic";
         };
-        
+
 /* End PBXNativeTarget section */
 
         CA609440A3671B886704EA40 = {
@@ -166,7 +166,7 @@ CA609ACA6A7C98AF0B5890DB,
                     );
                     runOnlyForDeploymentPostprocessing = 0;
                 };
-                
+
         CA60BE3FD8BF1B886704EA40 /* staticlib */ = {
             isa = XCConfigurationList;
             buildConfigurations = (
@@ -211,7 +211,7 @@ CA609ACA6A7C98AF0B5890DB,
                     );
                     runOnlyForDeploymentPostprocessing = 0;
                 };
-                
+
         CA60BE3FD8BFF6C5F472C3B2 /* cdylib */ = {
             isa = XCConfigurationList;
             buildConfigurations = (
@@ -228,7 +228,7 @@ CA609ACA6A7C98AF0B5890DB,
                     "CARGO_XCODE_CARGO_FILE_NAME" = "librust.dylib";
                     "CARGO_XCODE_CARGO_DEP_FILE_NAME" = "librust.d";
                     SUPPORTED_PLATFORMS = "macosx";
-                    
+
                 };
                 name = Release;
             };
@@ -239,7 +239,7 @@ CA609ACA6A7C98AF0B5890DB,
                     "CARGO_XCODE_CARGO_FILE_NAME" = "librust.dylib";
                     "CARGO_XCODE_CARGO_DEP_FILE_NAME" = "librust.d";
                     SUPPORTED_PLATFORMS = "macosx";
-                    
+
                 };
                 name = Debug;
             };
@@ -275,7 +275,7 @@ CA609ACA6A7C98AF0B5890DB,
         CA6019B9F45A3CC16B37690B = {
             isa = XCBuildConfiguration;
             buildSettings = {
-                
+
             ALWAYS_SEARCH_USER_PATHS = NO;
             SUPPORTS_MACCATALYST = YES;
             CARGO_TARGET_DIR = "$(PROJECT_TEMP_DIR)/cargo_target"; /* for cargo */
@@ -290,7 +290,7 @@ CA609ACA6A7C98AF0B5890DB,
             "CARGO_XCODE_TARGET_OS[sdk=appletvos*]" = "tvos";
             PRODUCT_NAME = "rust";
             SDKROOT = macosx;
-        
+
                 "CARGO_XCODE_BUILD_MODE" = "release"; /* for xcode scripts */
             };
             name = Release;
@@ -299,7 +299,7 @@ CA609ACA6A7C98AF0B5890DB,
         CA6019B9F45A228BE02872F8 = {
             isa = XCBuildConfiguration;
             buildSettings = {
-                
+
             ALWAYS_SEARCH_USER_PATHS = NO;
             SUPPORTS_MACCATALYST = YES;
             CARGO_TARGET_DIR = "$(PROJECT_TEMP_DIR)/cargo_target"; /* for cargo */
@@ -314,7 +314,7 @@ CA609ACA6A7C98AF0B5890DB,
             "CARGO_XCODE_TARGET_OS[sdk=appletvos*]" = "tvos";
             PRODUCT_NAME = "rust";
             SDKROOT = macosx;
-        
+
                 "CARGO_XCODE_BUILD_MODE" = "debug"; /* for xcode scripts */
                 ONLY_ACTIVE_ARCH = YES;
             };
@@ -358,4 +358,3 @@ CA60131C3126F6C5F472C3B2,
     };
     rootObject = CA609ACA6A7CE04653AD465F;
 }
-    

@@ -10,7 +10,7 @@
 		D43D164F2840F6E9007C0039 /* rust_crate.h in Headers */ = {isa = PBXBuildFile; fileRef = D43D164E2840F6E9007C0039 /* rust_crate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D43D166F2840FAF3007C0039 /* bridge_generated.h in Headers */ = {isa = PBXBuildFile; fileRef = D43D166E2840FAF3007C0039 /* bridge_generated.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D43D167D284106FE007C0039 /* librust_static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D43D1676284106CF007C0039 /* librust_static.a */; platformFilter = ios; };
-		D43D167E284106FE007C0039 /* rust.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D43D1678284106CF007C0039 /* rust.dylib */; platformFilters = (macos, ); };
+		D43D167E284106FE007C0039 /* librust.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D43D1678284106CF007C0039 /* librust.dylib */; platformFilters = (macos, ); };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +57,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D43D167D284106FE007C0039 /* librust_static.a in Frameworks */,
-				D43D167E284106FE007C0039 /* rust.dylib in Frameworks */,
+				D43D167E284106FE007C0039 /* librust.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,7 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				D43D1676284106CF007C0039 /* librust_static.a */,
-				D43D1678284106CF007C0039 /* rust.dylib */,
+				D43D1678284106CF007C0039 /* librust.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -188,10 +188,10 @@
 			remoteRef = D43D1675284106CF007C0039 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D43D1678284106CF007C0039 /* rust.dylib */ = {
+		D43D1678284106CF007C0039 /* liblibrust.dylib */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
-			path = rust.dylib;
+			path = librust.dylib;
 			remoteRef = D43D1677284106CF007C0039 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
