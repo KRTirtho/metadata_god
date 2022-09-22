@@ -4,13 +4,9 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>.DS_Store</key>
-		<data>
-		T5Szi9c/UpMqrzzz3Y2o2W2GC8k=
-		</data>
 		<key>Headers/bridge_generated.h</key>
 		<data>
-		t6obkTg4vowNF6ASTVXDTgn0yUA=
+		FYURHgWKwTYPGM3j9U9p4hiEF5Q=
 		</data>
 		<key>Headers/rust_crate.h</key>
 		<data>
@@ -18,7 +14,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		JtJ8hQGrMPi+tJTvGLv2Xgnx+LA=
+		xvxNYq7HlXtuvF/Gg6nDzRNwZ4E=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -31,7 +27,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			kYua/6E+6S0Wd+gvNuZW6aUnQCZLrpLmDTrJmZ74Skw=
+			uRPAQ/H7QhE5A0ZuNo9BU7FnAsXwQ8/Q/X/ObwHUBbY=
 			</data>
 		</dict>
 		<key>Headers/rust_crate.h</key>

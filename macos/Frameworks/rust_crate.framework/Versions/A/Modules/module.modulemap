@@ -1,0 +1,6 @@
+framework module rust_crate {
+  umbrella header "rust_crate.h"
+
+  export *
+  module * { export * }
+}
