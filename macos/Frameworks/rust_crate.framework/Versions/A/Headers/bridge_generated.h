@@ -46,19 +46,19 @@ void wire_write_metadata(int64_t port_,
                          struct wire_uint_8_list *file,
                          struct wire_Metadata *metadata);
 
-double *new_box_autoadd_f64(double value);
+double *new_box_autoadd_f64_0(double value);
 
-int32_t *new_box_autoadd_i32(int32_t value);
+int32_t *new_box_autoadd_i32_0(int32_t value);
 
-struct wire_Image *new_box_autoadd_image(void);
+struct wire_Image *new_box_autoadd_image_0(void);
 
-struct wire_Metadata *new_box_autoadd_metadata(void);
+struct wire_Metadata *new_box_autoadd_metadata_0(void);
 
-uint16_t *new_box_autoadd_u16(uint16_t value);
+uint16_t *new_box_autoadd_u16_0(uint16_t value);
 
-uint64_t *new_box_autoadd_u64(uint64_t value);
+uint64_t *new_box_autoadd_u64_0(uint64_t value);
 
-struct wire_uint_8_list *new_uint_8_list(int32_t len);
+struct wire_uint_8_list *new_uint_8_list_0(int32_t len);
 
 void free_WireSyncReturnStruct(struct WireSyncReturnStruct val);
 
@@ -69,13 +69,13 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) wire_ping);
     dummy_var ^= ((int64_t) (void*) wire_read_metadata);
     dummy_var ^= ((int64_t) (void*) wire_write_metadata);
-    dummy_var ^= ((int64_t) (void*) new_box_autoadd_f64);
-    dummy_var ^= ((int64_t) (void*) new_box_autoadd_i32);
-    dummy_var ^= ((int64_t) (void*) new_box_autoadd_image);
-    dummy_var ^= ((int64_t) (void*) new_box_autoadd_metadata);
-    dummy_var ^= ((int64_t) (void*) new_box_autoadd_u16);
-    dummy_var ^= ((int64_t) (void*) new_box_autoadd_u64);
-    dummy_var ^= ((int64_t) (void*) new_uint_8_list);
+    dummy_var ^= ((int64_t) (void*) new_box_autoadd_f64_0);
+    dummy_var ^= ((int64_t) (void*) new_box_autoadd_i32_0);
+    dummy_var ^= ((int64_t) (void*) new_box_autoadd_image_0);
+    dummy_var ^= ((int64_t) (void*) new_box_autoadd_metadata_0);
+    dummy_var ^= ((int64_t) (void*) new_box_autoadd_u16_0);
+    dummy_var ^= ((int64_t) (void*) new_box_autoadd_u64_0);
+    dummy_var ^= ((int64_t) (void*) new_uint_8_list_0);
     dummy_var ^= ((int64_t) (void*) free_WireSyncReturnStruct);
     dummy_var ^= ((int64_t) (void*) store_dart_post_cobject);
     return dummy_var;

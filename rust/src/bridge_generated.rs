@@ -105,37 +105,37 @@ pub struct wire_uint_8_list {
 // Section: allocate functions
 
 #[no_mangle]
-pub extern "C" fn new_box_autoadd_f64(value: f64) -> *mut f64 {
+pub extern "C" fn new_box_autoadd_f64_0(value: f64) -> *mut f64 {
     support::new_leak_box_ptr(value)
 }
 
 #[no_mangle]
-pub extern "C" fn new_box_autoadd_i32(value: i32) -> *mut i32 {
+pub extern "C" fn new_box_autoadd_i32_0(value: i32) -> *mut i32 {
     support::new_leak_box_ptr(value)
 }
 
 #[no_mangle]
-pub extern "C" fn new_box_autoadd_image() -> *mut wire_Image {
+pub extern "C" fn new_box_autoadd_image_0() -> *mut wire_Image {
     support::new_leak_box_ptr(wire_Image::new_with_null_ptr())
 }
 
 #[no_mangle]
-pub extern "C" fn new_box_autoadd_metadata() -> *mut wire_Metadata {
+pub extern "C" fn new_box_autoadd_metadata_0() -> *mut wire_Metadata {
     support::new_leak_box_ptr(wire_Metadata::new_with_null_ptr())
 }
 
 #[no_mangle]
-pub extern "C" fn new_box_autoadd_u16(value: u16) -> *mut u16 {
+pub extern "C" fn new_box_autoadd_u16_0(value: u16) -> *mut u16 {
     support::new_leak_box_ptr(value)
 }
 
 #[no_mangle]
-pub extern "C" fn new_box_autoadd_u64(value: u64) -> *mut u64 {
+pub extern "C" fn new_box_autoadd_u64_0(value: u64) -> *mut u64 {
     support::new_leak_box_ptr(value)
 }
 
 #[no_mangle]
-pub extern "C" fn new_uint_8_list(len: i32) -> *mut wire_uint_8_list {
+pub extern "C" fn new_uint_8_list_0(len: i32) -> *mut wire_uint_8_list {
     let ans = wire_uint_8_list {
         ptr: support::new_leak_vec_ptr(Default::default(), len),
         len,
@@ -184,14 +184,14 @@ impl Wire2Api<i32> for *mut i32 {
 impl Wire2Api<Image> for *mut wire_Image {
     fn wire2api(self) -> Image {
         let wrap = unsafe { support::box_from_leak_ptr(self) };
-        (*wrap).wire2api().into()
+        Wire2Api::<Image>::wire2api(*wrap).into()
     }
 }
 
 impl Wire2Api<Metadata> for *mut wire_Metadata {
     fn wire2api(self) -> Metadata {
         let wrap = unsafe { support::box_from_leak_ptr(self) };
-        (*wrap).wire2api().into()
+        Wire2Api::<Metadata>::wire2api(*wrap).into()
     }
 }
 
