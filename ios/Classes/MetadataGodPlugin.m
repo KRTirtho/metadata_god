@@ -10,7 +10,7 @@
 
 @implementation MetadataGodPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-  ((void*)dummy_method_to_enforce_bundling);
+  dummy_method_to_enforce_bundling();
   [SwiftMetadataGodPlugin registerWithRegistrar:registrar];
 }
 @end

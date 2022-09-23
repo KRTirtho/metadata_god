@@ -15,7 +15,7 @@ A new Flutter project.
 
   s.source           = { :path => '.' }
   s.source_files     = 'Classes/**/*'
-  s.vendored_libraries = 'librust.dylib'
+  s.vendored_frameworks = 'Frameworks/rust_crate.framework'
   
   s.dependency 'FlutterMacOS'
 

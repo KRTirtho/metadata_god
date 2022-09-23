@@ -12,7 +12,7 @@ DynamicLibrary platformSpecificDynamicLib() {
     case 'android':
       return DynamicLibrary.open('lib$base.so');
     case 'macos':
-      return DynamicLibrary.open('$base.dylib');
+      return DynamicLibrary.executable();
     case 'ios':
       return DynamicLibrary.process();
     case 'windows':
