@@ -250,6 +250,8 @@
 			buildSettings = {
 				CARGO_XCODE_CARGO_DEP_FILE_NAME = librust.d;
 				CARGO_XCODE_CARGO_FILE_NAME = librust.dylib;
+				LD_DYLIB_INSTALL_NAME = "@rpath/librust.dylib";
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_NAME = rust;
 				SUPPORTED_PLATFORMS = macosx;
 			};
@@ -274,6 +276,8 @@
 			buildSettings = {
 				CARGO_XCODE_CARGO_DEP_FILE_NAME = librust.d;
 				CARGO_XCODE_CARGO_FILE_NAME = librust.dylib;
+				LD_DYLIB_INSTALL_NAME = "@rpath/librust.dylib";
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_NAME = rust;
 				SUPPORTED_PLATFORMS = macosx;
 			};
