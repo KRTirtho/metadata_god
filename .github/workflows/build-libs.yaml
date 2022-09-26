@@ -32,8 +32,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          cd rust && cargo build --release
+          rustup target add aarch64-apple-darwin
+          cd rust && cargo build --release --target=aarch64-apple-darwin
       - uses: actions/upload-artifact@v3
         with:
           name: RustLib
-          path: rust/target/release/librust.dylib
+          path: rust/target/aarch64-apple-darwin/release/librust.dylib
