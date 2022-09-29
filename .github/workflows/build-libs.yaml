@@ -41,5 +41,5 @@ jobs:
         with:
           name: RustLib
           path: |
-            rust/target/aarch64-apple-darwin/release/librust.dylib
+            rust/target/aarch64-apple-darwin/release/librust.a
             rust/target/aarch64-apple-ios/release/librust.a
