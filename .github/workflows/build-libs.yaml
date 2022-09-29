@@ -31,14 +31,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          rustup target add aarch64-apple-darwin
           rustup target add aarch64-apple-ios
           cd rust
-          cargo build --release --target=aarch64-apple-darwin
+          cargo build --release
           cargo build --release --target=aarch64-apple-ios
       - uses: actions/upload-artifact@v3
         with:
           name: RustLib
           path: |
-            rust/target/aarch64-apple-darwin/release/librust.a
+            rust/target/release/librust.dylib
             rust/target/aarch64-apple-ios/release/librust.a
