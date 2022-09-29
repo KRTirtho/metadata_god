@@ -34,10 +34,12 @@ jobs:
           rustup target add aarch64-apple-ios
           cd rust
           cargo build --release
+          cargo build --release --target=aarch64-apple-darwin
+          lipo -create -output librust.dylib target/release/librust.dylib target/aarch64-apple-darwin/release/librust.dylib
           cargo build --release --target=aarch64-apple-ios
       - uses: actions/upload-artifact@v3
         with:
           name: RustLib
           path: |
-            rust/target/release/librust.dylib
+            rust/librust.dylib
             rust/target/aarch64-apple-ios/release/librust.a

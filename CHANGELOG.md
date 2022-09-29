@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.3.1 (2022-09-29)
+
+### Bug Fixes
+* macos binary not working for universal applications
+* flutter windows unneeded librust.lib file remove ([e9fc90c](https://github.com/KRTirtho/metadata_god/commit/e9fc90cb8b0245f6537e1a49cd63105f8db068a0))
+
 ### 0.3.0 (2022-09-27)
 
 ### Features
