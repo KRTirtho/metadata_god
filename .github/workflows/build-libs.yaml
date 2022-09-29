@@ -25,7 +25,6 @@ jobs:
           name: RustLib
           path: |
             rust/target/release/rust.dll
-            rust/target/release/rust.lib
 
   macos:
     runs-on: macos-latest
