@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_rust_bridge: ^1.59.0
+  meta: ^1.8.0
   ffi: ^2.0.1
 
 dev_dependencies:
