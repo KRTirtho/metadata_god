@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.2](https://github.com/KRTirtho/metadata_god/compare/v0.3.1...v0.3.2) (2023-01-05)
+
+
+### Bug Fixes
+
+* no implementation of WireSyncRust build error ([0c755e2](https://github.com/KRTirtho/metadata_god/commit/0c755e26564d37d18ee401d7080ce48689a43a33))
+
 ### 0.3.1 (2022-09-29)
 
 ### Bug Fixes
