@@ -40,7 +40,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: RustLib
-          path: dist/
+          path: dist/**/*.so
 
   windows:
     runs-on: windows-latest
