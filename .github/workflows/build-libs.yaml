@@ -34,13 +34,18 @@ jobs:
           cargo install cargo-ndk
           mkdir dist
           cd rust; cargo ndk -t armeabi-v7a -t arm64-v8a -t x86_64 -t x86 -o dist build --release
-      - if: ${{ failure() }}
-        name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
       - uses: actions/upload-artifact@v3
         with:
           name: RustLib
-          path: dist/**/*.so
+          path: |
+            dist/armeabi-v7a/librust.so
+            dist/arm64-v8a/librust.so
+            dist/x86_64/librust.so
+            dist/x86/librust.so
+          if-no-files-found: error
+      - if: ${{ failure() }}
+        name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
 
   windows:
     runs-on: windows-latest
