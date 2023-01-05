@@ -13,7 +13,7 @@ name = "rust"
 path = "src/main.rs"
 
 [dependencies]
-flutter_rust_bridge = "1"
+flutter_rust_bridge = "1.59.0"
 anyhow = "1"
 audiotags = "0.4.1"
 
