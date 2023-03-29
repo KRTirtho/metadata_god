@@ -18,7 +18,7 @@ A new Flutter plugin project.
   s.dependency 'FlutterMacOS'
   s.framework = 'Carbon'
 
-  s.platform = :osx, '10.11'
+  s.platform = :osx, '10.13'
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
 
   # This is identitcal the script in iOS podspec
