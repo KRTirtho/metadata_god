@@ -1,9 +1,18 @@
 name: Build Example
 on:
   workflow_dispatch:
+    inputs:
+      platform:
+        description: 'Platforms to build'
+        type: choice
+        default: 'macos'
+        options:
+          - 'macos'
+          - 'windows'
 
 jobs:
   macos:
+    if: ${{ inputs.platform == 'macos' }}
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
@@ -19,6 +28,7 @@ jobs:
           limit-access-to-actor: true
 
   windows:
+    if: ${{ inputs.platform == 'windows' }}
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
