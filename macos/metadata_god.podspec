@@ -23,7 +23,7 @@ A new Flutter plugin project.
 
   # This is identitcal the script in iOS podspec
   s.script_phase = {
-    :name => 'Build SuperNativeExtensions Rust library',
+    :name => 'Build MetadataGod Rust library',
     :script => 'sh $PODS_TARGET_SRCROOT/../cargokit/build_pod.sh ../rust metadata_god',
     :execution_position=> :before_compile,
     :input_files => ['${BUILT_PRODUCTS_DIR}/cargokit_phony'],

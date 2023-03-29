@@ -345,6 +345,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "metadata_god"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "audiotags",
+ "flutter_rust_bridge",
+]
+
+[[package]]
 name = "metaflac"
 version = "0.2.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -469,15 +478,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "62f25bc4c7e55e0b0b7a1d43fb893f4fa1361d0abe38b9ce4f323c2adfe6ef42"
 dependencies = [
  "bitflags",
-]
-
-[[package]]
-name = "rust"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "audiotags",
- "flutter_rust_bridge",
 ]
 
 [[package]]

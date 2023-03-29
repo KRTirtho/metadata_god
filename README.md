@@ -20,9 +20,33 @@ $ flutter pub add metadata_god
 
 ## Configuration
 ### Android 
-For using `metadata_god` in Android it needs `READ_EXTERNAL_STORAGE` and `WRITE_EXTERNAL_STORAGE` permissions
+NDK is required to build metadata_god. You can use Android Studio SDK Manager to install the NDK:
+```txt
+Preferences -> Android SDK -> SDK Tools -> NDK (Side by Side).
+```
+**PS:** Make sure to check the "Show Package Details" checkbox and install the NDK version required by 
+your current Flutter SDK. You can find it here: [stable][stable-ndk] | [master][master-ndk] or while running targeting
+an Android device, you can find it in the error message.
 
-So, add following green highlighted lines to `android/app/src/main/AndroidManifest.xml` file:
+metadata_god requires minimum API level 23 (Android 6.0). You'll need to add following lines to `android/app/build.gradle` file:
+
+```diff
+android {
+    ....
+    defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId "com.example.example"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
+-       minSdkVersion flutter.minSdkVersion
++       minSdkVersion 23
+    ....
+```
+
+
+`metadata_god` needs `READ_EXTERNAL_STORAGE` and `WRITE_EXTERNAL_STORAGE` permissions
+
+Add following green highlighted lines to `android/app/src/main/AndroidManifest.xml` file:
 
 ```diff
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.example">
@@ -62,7 +86,7 @@ Finally, use packages like `permission_handler` to request storage permissions f
 
 ### Other platforms
 
-Linux, Windows and MacOS doesn't need any extra configuration and good to go after installation
+Linux, Windows and MacOS, iOS doesn't need any extra configuration and good to go after installation
 
 ## Usage
 
@@ -111,3 +135,6 @@ Please make sure to update tests as appropriate.
 ## Author
 
 [Kingkor Roy Tirtho](https://github.com/KRTirtho)
+
+[stable-ndk]:https://github.com/flutter/flutter/blob/stable/packages/flutter_tools/gradle/flutter.gradle#L46
+[master-ndk]:https://github.com/flutter/flutter/blob/master/packages/flutter_tools/gradle/flutter.gradle#L50

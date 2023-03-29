@@ -44,9 +44,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    final file = File(Platform.isAndroid
-        ? "/storage/emulated/0/Download/Spotube/shyaway.m4a"
-        : "/home/krtirtho/Downloads/Spotube/shyaway.m4a");
+    final file = File(
+      Platform.isAndroid
+          ? "/storage/emulated/0/Download/Spotube/shyaway.m4a"
+          : "/home/${Platform.environment["USER"]}/Downloads/Spotube/SZA - Kill Bill (Official Video).m4a",
+    );
     super.initState();
     () async {
       MetadataGod.ping().then((ping) => print("PING: $ping"));
@@ -94,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),

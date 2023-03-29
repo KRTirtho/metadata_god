@@ -3,12 +3,11 @@ import 'bridge_generated.dart';
 export 'bridge_generated.dart';
 import 'dart:io';
 
-const base = 'rust';
+const base = 'metadata_god';
 
 DynamicLibrary platformSpecificDynamicLib() {
   switch (Platform.operatingSystem) {
     case 'linux':
-      return DynamicLibrary.open('lib$base.so');
     case 'android':
       return DynamicLibrary.open('lib$base.so');
     case 'macos':
