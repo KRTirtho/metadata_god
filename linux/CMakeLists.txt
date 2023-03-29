@@ -38,13 +38,12 @@ target_include_directories(${PLUGIN_NAME} INTERFACE
 target_link_libraries(${PLUGIN_NAME} PRIVATE flutter)
 target_link_libraries(${PLUGIN_NAME} PRIVATE PkgConfig::GTK)
 
-set(CRATE_NAME "rust")
-set(CRATE_NAME ${CRATE_NAME} PARENT_SCOPE)
-add_subdirectory(${CRATE_NAME})
+include("../cargokit/cmake/cargokit.cmake")
+apply_cargokit(${PLUGIN_NAME} ../rust metadata_god "")
 # List of absolute paths to libraries that should be bundled with the plugin.
 # This list could contain prebuilt libraries, or libraries created by an
 # external build triggered from this build file.
 set(metadata_god_bundled_libraries
-  "$<TARGET_FILE:${CRATE_NAME}>"
+  "${${PLUGIN_NAME}_cargokit_lib}"
   PARENT_SCOPE
 )

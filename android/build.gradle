@@ -38,16 +38,20 @@ android {
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
-        main {
-            jniLibs.srcDirs = ['src/main/jniLibs']
-        }
     }
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 23
     }
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+
+apply from: "../cargokit/gradle/plugin.gradle"
+
+cargokit {
+    manifestDir = "../rust"
+    libname = "metadata_god"
 }
