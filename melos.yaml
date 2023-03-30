@@ -38,6 +38,31 @@ scripts:
     run: bash scripts/build-other.sh
     description: Build the .tar.gz for all other platforms.
 
+  copylib:linux:
+    run: |
+      CURR_VERSION=metadata_god-v`awk '/^version: /{print $2}' packages/metadata_god/pubspec.yaml`
+      cp platform-build/other.tar.gz packages/flutter_metadata_god/linux/$CURR_VERSION.tar.gz
+
+  copylib:windows:
+    run: |
+      CURR_VERSION=metadata_god-v`awk '/^version: /{print $2}' packages/metadata_god/pubspec.yaml`
+      cp platform-build/other.tar.gz packages/flutter_metadata_god/windows/$CURR_VERSION.tar.gz
+
+  copylib:macos:
+    run: |
+      CURR_VERSION=metadata_god-v`awk '/^version: /{print $2}' packages/metadata_god/pubspec.yaml`
+      cp platform-build/MetadataGod.xcframework.zip packages/flutter_metadata_god/macos/Frameworks/$CURR_VERSION.zip
+
+  copylib:ios:
+    run: |
+      CURR_VERSION=metadata_god-v`awk '/^version: /{print $2}' packages/metadata_god/pubspec.yaml`
+      cp platform-build/MetadataGod.xcframework.zip packages/flutter_metadata_god/ios/Frameworks/$CURR_VERSION.zip
+
+  copylib:android:
+    run: |
+      CURR_VERSION=metadata_god-v`awk '/^version: /{print $2}' packages/metadata_god/pubspec.yaml`
+      cp platform-build/android.tar.gz packages/flutter_metadata_god/android/$CURR_VERSION.tar.gz
+
   test:
     run: melos run test:dart --no-select && melos run test:flutter --no-select
     description: Run all Dart & Flutter tests in this project.

@@ -90,3 +90,8 @@ class MetadataGod implements bridge.MetadataGod {
     return _lib.writeMetadata(file: file, metadata: metadata, hint: hint);
   }
 }
+
+extension MetadataDuration on bridge.Metadata {
+  Duration? get duration =>
+      durationMs == null ? null : Duration(milliseconds: durationMs!.floor());
+}
