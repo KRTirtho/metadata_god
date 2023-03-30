@@ -1,10 +1,11 @@
 name: Build & Test
 
 on:
-  pull_request:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+  # pull_request:
+  # push:
+  #   branches:
+  #     - main
   # schedule:
   #   # runs the CI everyday at 10AM
   #   - cron: "0 10 * * *"
