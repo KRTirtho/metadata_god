@@ -1,13 +1,12 @@
 name: metadata_god
 description: A starting point for Dart libraries or applications.
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+repository: https://github.com/KRTirtho/metadata_god/blob/main/packages/metadata_god
+homepage: https://github.com/KRTirtho/metadata_god
 
 environment:
   sdk: '>=2.19.2 <3.0.0'
 
-# dependencies:
-#   path: ^1.8.0
 
 dev_dependencies:
   ffigen: ^7.2.9
