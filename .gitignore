@@ -36,3 +36,4 @@ build/
 /target/
 /Cargo.lock
 /platform-build
+pubspec_overrides.yaml
