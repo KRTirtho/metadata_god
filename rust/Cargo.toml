@@ -19,6 +19,7 @@ audiotags = "0.4.1"
 
 [profile.release]
 # strip = "symbols"
-opt-level = "s"
+# opt-level = "s"
+# codegen-units = 1
 lto = true
-codegen-units = 1
+panic = "abort"

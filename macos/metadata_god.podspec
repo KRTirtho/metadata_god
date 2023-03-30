@@ -32,7 +32,7 @@ A new Flutter plugin project.
   s.pod_target_xcconfig = {
     'DEFINES_MODULE' => 'YES',
     # For static lib we need better control of re-exported symbols
-    # 'EXPORTED_SYMBOLS_FILE' => '$PODS_TARGET_SRCROOT/../rust/symbols.txt',
+    'EXPORTED_SYMBOLS_FILE' => '$PODS_TARGET_SRCROOT/../rust/symbols.txt',
     'OTHER_LDFLAGS' => '-lmetadata_god',
     'DEAD_CODE_STRIPPING' => 'YES',
     'STRIP_INSTALLED_PRODUCT[config=Release][sdk=*][arch=*]' => "YES",

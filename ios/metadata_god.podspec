@@ -32,7 +32,7 @@ A new Flutter plugin project.
     # Rust can't produce armv7 and it's being removed from Flutter as well
     'EXCLUDED_ARCHS' => 'armv7',
     # For static lib we need better control of re-exported symbols
-    # 'EXPORTED_SYMBOLS_FILE' => '$PODS_TARGET_SRCROOT/../rust/symbols.txt',
+    'EXPORTED_SYMBOLS_FILE' => '$PODS_TARGET_SRCROOT/../rust/symbols.txt',
     'OTHER_LDFLAGS' => '-lmetadata_god -framework CoreServices',
   }
   s.user_target_xcconfig = {
