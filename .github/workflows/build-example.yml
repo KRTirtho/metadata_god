@@ -1,4 +1,4 @@
-name: Debug
+name: Build Example
 on:
   workflow_dispatch:
     inputs:
