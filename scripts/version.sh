@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CURR_VERSION=metadata_god-v`awk '/^version: /{print $2}' packages/metadata_god/pubspec.yaml`
+CURR_VERSION=v`awk '/^version: /{print $2}' packages/metadata_god/pubspec.yaml`
 
 # iOS & macOS
 APPLE_HEADER="release_tag_name = '$CURR_VERSION' # generated; do not edit"
