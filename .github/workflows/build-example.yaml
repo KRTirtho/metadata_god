@@ -1,0 +1,55 @@
+name: Build Example
+on:
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: 'Platforms to build'
+        type: choice
+        default: 'macos'
+        options:
+          - 'macos'
+          - 'windows'
+
+jobs:
+  macos:
+    if: ${{ inputs.platform == 'macos' }}
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+      - uses: bluefireteam/melos-action@v2
+      - uses: goto-bus-stop/setup-zig@v2
+      - uses: KyleMayes/install-llvm-action@v1
+        with:
+          version: "15"
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+      - uses: nttld/setup-ndk@v1
+        with:
+          ndk-version: r25b
+
+      - name: Build all library binaries
+        run: melos run build
+
+      - run: flutter config --enable-macos-desktop
+      - run: flutter pub get
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        with:
+          limit-access-to-actor: true
+
+  windows:
+    if: ${{ inputs.platform == 'windows' }}
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          cache: true
+      - run: flutter config --enable-macos-desktop
+      - run: flutter pub get
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        with:
+          limit-access-to-actor: true

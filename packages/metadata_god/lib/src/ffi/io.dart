@@ -5,8 +5,7 @@ import 'package:metadata_god/src/bridge_generated.dart';
 
 typedef ExternalLibrary = DynamicLibrary;
 
-MetadataGod createWrapperImpl(ExternalLibrary dylib) =>
-    MetadataGodImpl(dylib);
+MetadataGod createWrapperImpl(ExternalLibrary dylib) => MetadataGodImpl(dylib);
 
 DynamicLibrary createLibraryImpl() {
   const base = 'metadata_god';

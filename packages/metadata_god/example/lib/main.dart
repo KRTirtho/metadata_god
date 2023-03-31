@@ -1,10 +1,29 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 
-import 'package:metadata_god/metadata_god.dart' as metadata_god;
+import 'package:metadata_god/metadata_god.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:metadata_god_example/reader_data_view.dart';
+import 'package:metadata_god_example/writer_view.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  MetadataGod.initialize();
+  runApp(const MyActualApp());
+}
+
+class MyActualApp extends StatelessWidget {
+  const MyActualApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Metadata God',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyApp(),
+    );
+  }
 }
 
 class MyApp extends StatefulWidget {
@@ -15,57 +34,121 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late int sumResult;
-  late Future<int> sumAsyncResult;
+  Metadata? metadata;
+  PlatformFile? selectedFile;
 
   @override
   void initState() {
     super.initState();
-    sumResult = metadata_god.sum(1, 2);
-    sumAsyncResult = metadata_god.sumAsync(3, 4);
+    print("Calling: initState");
+    selectedFile = PlatformFile(
+      name: "test.m4a",
+      path: "assets/test.m4a",
+      size: 3700,
+    );
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final metadata = await MetadataGod.readMetadata(
+        file: "assets/test.m4a",
+      );
+      setState(() {
+        this.metadata = metadata;
+      });
+      print("metadata.album: ${metadata.album}");
+      print("metadata.albumArtist: ${metadata.albumArtist}");
+      print("metadata.artist: ${metadata.artist}");
+      print("metadata.discNumber: ${metadata.discNumber}");
+      print("metadata.discTotal: ${metadata.discTotal}");
+      print("metadata.durationMs: ${metadata.durationMs}");
+      print("metadata.fileSize: ${metadata.fileSize}");
+      print("metadata.genre: ${metadata.genre}");
+      print("metadata.picture: ${metadata.picture?.mimeType}");
+      print("metadata.title: ${metadata.title}");
+      print("metadata.trackNumber: ${metadata.trackNumber}");
+      print("metadata.trackTotal: ${metadata.trackTotal}");
+      print("metadata.year: ${metadata.year}");
+    });
+    print("End: initState");
   }
 
   @override
   Widget build(BuildContext context) {
-    const textStyle = TextStyle(fontSize: 25);
-    const spacerSmall = SizedBox(height: 10);
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Native Packages'),
-        ),
-        body: SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              children: [
-                const Text(
-                  'This calls a native function through FFI that is shipped as source in the package. '
-                  'The native code is built as part of the Flutter Runner build.',
-                  style: textStyle,
-                  textAlign: TextAlign.center,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Native Packages'),
+      ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Wrap(
+            alignment: WrapAlignment.center,
+            runAlignment: WrapAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    Text("Select a audio file: ${selectedFile?.name ?? ""}"),
+                    const SizedBox(height: 16),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () async {
+                            final result = await FilePicker.platform.pickFiles(
+                              allowCompression: false,
+                              allowMultiple: false,
+                              allowedExtensions: ["m4a", "mp3", 'flac', 'ogg'],
+                              withData: false,
+                              withReadStream: false,
+                            );
+
+                            if (result == null) return;
+                            final fileMetadata = await MetadataGod.readMetadata(
+                                file: result.files.first.path!);
+
+                            setState(() {
+                              metadata = fileMetadata;
+                              selectedFile = result.files.first;
+                            });
+                          },
+                          child: const Text("Select"),
+                        ),
+                        const SizedBox(width: 16),
+                        ElevatedButton.icon(
+                          onPressed: selectedFile == null
+                              ? null
+                              : () async {
+                                  final writable = await showDialog<Metadata?>(
+                                    context: context,
+                                    builder: (context) =>
+                                        WriterView(metadata: metadata),
+                                  );
+
+                                  if (writable == null) return;
+                                  await MetadataGod.writeMetadata(
+                                    file: selectedFile!.path!,
+                                    metadata: writable,
+                                  );
+                                  final fileMetadata =
+                                      await MetadataGod.readMetadata(
+                                    file: selectedFile!.path!,
+                                  );
+                                  setState(() {
+                                    metadata = fileMetadata;
+                                  });
+                                },
+                          label: const Text("Edit"),
+                          icon: const Icon(Icons.edit_outlined),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                spacerSmall,
-                Text(
-                  'sum(1, 2) = $sumResult',
-                  style: textStyle,
-                  textAlign: TextAlign.center,
+              ),
+              if (metadata != null)
+                ReaderDataView(
+                  metadata: metadata!,
                 ),
-                spacerSmall,
-                FutureBuilder<int>(
-                  future: sumAsyncResult,
-                  builder: (BuildContext context, AsyncSnapshot<int> value) {
-                    final displayValue =
-                        (value.hasData) ? value.data : 'loading';
-                    return Text(
-                      'await sumAsync(3, 4) = $displayValue',
-                      style: textStyle,
-                      textAlign: TextAlign.center,
-                    );
-                  },
-                ),
-              ],
-            ),
+            ],
           ),
         ),
       ),

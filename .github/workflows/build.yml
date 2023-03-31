@@ -1,13 +1,14 @@
 name: Build & Test
 
 on:
-  pull_request:
-  push:
-    branches:
-      - main
-  schedule:
-    # runs the CI everyday at 10AM
-    - cron: "0 10 * * *"
+  workflow_dispatch:
+  # pull_request:
+  # push:
+  #   branches:
+  #     - main
+  # schedule:
+  #   # runs the CI everyday at 10AM
+  #   - cron: "0 10 * * *"
 
 jobs:
   # General build, check, and test steps
@@ -35,7 +36,7 @@ jobs:
       - name: Build Rust code for Dart tests
         run: cargo build -r
 
-      # Flutter
+      # Dart/Flutter
       - name: Check Dart format
         run: melos run check-format --no-select
       - name: Dart code analysis
@@ -151,7 +152,7 @@ jobs:
 
       - name: Run Flutter integration tests
         working-directory: packages/metadata_god/example
-        run: flutter test -d $ integration_test
+        run: flutter test -d ${{ env.DEVICE_ID }} integration_test
 
   android_integration_test:
     runs-on: macos-latest

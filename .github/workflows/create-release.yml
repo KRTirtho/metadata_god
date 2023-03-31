@@ -20,17 +20,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          token: $
+        # You will need to set a repository secret of BOT_ACCESS_TOKEN to your GitHub personal access token (PAT)
+        # to allow for pushes to main from this Action.
+          token: ${{ secrets.BOT_ACCESS_TOKEN }}
           fetch-depth: 0
       - name: Setup git
         run: |
-          git config user.name "K R Tirtho"
+          git config user.name "Kingkor Roy Tirtho"
           git config user.email "krtirtho@gmail.com"
       - uses: subosito/flutter-action@v2
       - uses: bluefireteam/melos-action@v2
 
       - name: Create the new version(s)
-        run: melos version --yes $
+        run: melos version --yes ${{ inputs.version_parameters }}
 
       - name: Push created version commit
         run: git push

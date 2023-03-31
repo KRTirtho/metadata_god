@@ -5,7 +5,7 @@ import 'ffi/stub.dart'
 
 MetadataGod? _wrapper;
 
-MetadataGod createLib() {
+MetadataGod initializeDynamicLibrary() {
   _wrapper ??= createWrapperImpl(createLibraryImpl());
   return _wrapper!;
 }

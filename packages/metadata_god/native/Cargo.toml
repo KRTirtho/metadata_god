@@ -1,6 +1,6 @@
 [package]
 name = "metadata_god"
-version = "0.0.0"
+version = "1.0.0"
 edition = "2021"
 
 [lib]
@@ -11,3 +11,5 @@ flutter_rust_bridge_codegen = "1.72.*"
 
 [dependencies]
 flutter_rust_bridge = "1.72.*"
+anyhow = "1"
+audiotags = "0.4.1"
