@@ -34,11 +34,8 @@ abstract class MetadataGod {
   /// Read metadata from a mp3, m4a, ogg & flac file
   ///
   /// The path to file must exists otherwise will throw [Exception]
-  static Future<bridge.Metadata> readMetadata({
-    required String file,
-    hint,
-  }) {
-    return api.readMetadata(file: file, hint: hint);
+  static Future<bridge.Metadata> readMetadata({required String file}) {
+    return api.readMetadata(file: file);
   }
 
   /// Write metadata to a mp3, m4a, ogg & flac file
@@ -72,9 +69,8 @@ abstract class MetadataGod {
   static Future<void> writeMetadata({
     required String file,
     required bridge.Metadata metadata,
-    hint,
   }) {
-    return api.writeMetadata(file: file, metadata: metadata, hint: hint);
+    return api.writeMetadata(file: file, metadata: metadata);
   }
 }
 
