@@ -1,0 +1,15 @@
+version: 2
+enable-beta-ecosystems: true
+updates:
+  - package-ecosystem: pub
+    directory: "/packages/metadata_god"
+    schedule:
+      interval: weekly
+  - package-ecosystem: pub
+    directory: "/packages/metadata_god/example"
+    schedule:
+      interval: weekly
+  - package-ecosystem: cargo
+    directory: "/packages/metadata_god/native"
+    schedule:
+      interval: weekly

@@ -1,39 +1,8 @@
-name: metadata_god
-description: Plugin for retrieving and writing audio tags/metadata from audio files
-version: 0.3.2
-homepage: https://github.com/KRTirtho/metadata_god
+name: metadata_god_workspace
 
 environment:
-  sdk: ">=2.14.0 <3.0.0"
-  flutter: ">=2.5.0"
+  sdk: '>=2.19.2 <3.0.0'
 
-dependencies:
-  flutter:
-    sdk: flutter
-  flutter_rust_bridge: ^1.59.0
-  meta: ^1.8.0
-  ffi: ^2.0.1
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^2.0.0
-  ffigen: ^7.2.4
-
-flutter:
-  plugin:
-    platforms:
-      android:
-        package: com.krtirtho.metadata_god
-        pluginClass: MetadataGodPlugin
-      linux:
-        pluginClass: MetadataGodPlugin
-      macos:
-        pluginClass: MetadataGodPlugin
-      ios:
-        pluginClass: MetadataGodPlugin
-      windows:
-        pluginClass: MetadataGodPluginCApi
-      web:
-        fileName: metadata_god_web.dart
-        pluginClass: MetadataGod
+  melos: ^3.0.1

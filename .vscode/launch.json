@@ -1,0 +1,27 @@
+{
+  "configurations": [
+    {
+      "name": "example",
+      "type": "dart",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/packages/metadata_god/example",
+      "program": "lib/main.dart"
+    },
+    {
+      "name": "example (profile)",
+      "type": "dart",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/packages/metadata_god/example",
+      "program": "lib/main.dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "example (release)",
+      "type": "dart",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/packages/metadata_god/example",
+      "program": "lib/main.dart",
+      "flutterMode": "release"
+    }
+  ]
+}
