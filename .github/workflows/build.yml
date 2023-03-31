@@ -59,7 +59,7 @@ jobs:
         run: melos run build:apple
       - name: Copy the XCFramework to the needed location
         run: |
-          CURR_VERSION=metadata_god-v`awk '/^version: /{print $2}' packages/metadata_god/pubspec.yaml`
+          CURR_VERSION=v`awk '/^version: /{print $2}' packages/metadata_god/pubspec.yaml`
           cp platform-build/MetadataGod.xcframework.zip packages/metadata_god/macos/Frameworks/$CURR_VERSION.zip
           echo Copied file!
 
@@ -87,7 +87,7 @@ jobs:
       - name: Copy the binaries to the needed location
         shell: bash
         run: |
-          CURR_VERSION=metadata_god-v`awk '/^version: /{print $2}' packages/metadata_god/pubspec.yaml`
+          CURR_VERSION=v`awk '/^version: /{print $2}' packages/metadata_god/pubspec.yaml`
           cp platform-build/other.tar.gz packages/metadata_god/windows/$CURR_VERSION.tar.gz
           echo Copied file!
 
@@ -117,7 +117,7 @@ jobs:
         run: melos run build:other
       - name: Copy the binaries to the needed location
         run: |
-          CURR_VERSION=metadata_god-v`awk '/^version: /{print $2}' packages/metadata_god/pubspec.yaml`
+          CURR_VERSION=v`awk '/^version: /{print $2}' packages/metadata_god/pubspec.yaml`
           cp platform-build/other.tar.gz packages/metadata_god/linux/$CURR_VERSION.tar.gz
           echo Copied file!
 
@@ -146,7 +146,7 @@ jobs:
         run: melos run build:apple
       - name: Copy the XCFramework to the needed location
         run: |
-          CURR_VERSION=metadata_god-v`awk '/^version: /{print $2}' packages/metadata_god/pubspec.yaml`
+          CURR_VERSION=v`awk '/^version: /{print $2}' packages/metadata_god/pubspec.yaml`
           cp platform-build/MetadataGod.xcframework.zip packages/metadata_god/ios/Frameworks/$CURR_VERSION.zip
           echo Copied file!
 
@@ -176,7 +176,7 @@ jobs:
         run: melos run build:android
       - name: Copy the binaries to the needed location
         run: |
-          CURR_VERSION=metadata_god-v`awk '/^version: /{print $2}' packages/metadata_god/pubspec.yaml`
+          CURR_VERSION=v`awk '/^version: /{print $2}' packages/metadata_god/pubspec.yaml`
           cp platform-build/android.tar.gz packages/metadata_god/android/$CURR_VERSION.tar.gz
           echo Copied file!
 
