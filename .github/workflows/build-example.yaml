@@ -30,7 +30,7 @@ jobs:
           ndk-version: r25b
 
       - name: Build all library binaries
-        run: melos run build
+        run: melos run build:apple
 
       - run: flutter config --enable-macos-desktop
       - run: flutter pub get
