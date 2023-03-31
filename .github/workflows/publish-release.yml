@@ -6,7 +6,7 @@ on:
       dry_run:
         description: "Dry run? (true/false)"
         type: boolean
-        default: true
+        default: false
   push:
     tags:
       - "*"
