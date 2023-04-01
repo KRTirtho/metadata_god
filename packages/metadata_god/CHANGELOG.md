@@ -1,13 +1,8 @@
 ## 0.4.1
 
- - **FIX**: rename Image to Picture to resolve name conflict with material Image.
- - **FIX**: export Image type.
- - **FIX**: hide internal api getter.
- - **FIX**: build file release tag version.
-
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+ - **FIX**: rename `Image` to `Picture` to resolve name conflict with material Image.
+ - **FIX**: export `Picture` type.
+ - **FIX**: hide internal `api` getter.
 
 ### [0.4.0](https://github.com/KRTirtho/metadata_god/compare/v0.3.1...v0.4.0) (2023-01-05)
 
