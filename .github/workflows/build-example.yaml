@@ -29,8 +29,18 @@ jobs:
         with:
           ndk-version: r25b
 
-      - name: Build all library binaries
-        run: melos run build:apple
+      - name: Start iOS Simulator
+        run: |
+          DEVICE_ID=$(xcrun xctrace list devices | grep iPhone | head -1 | awk '{print $NF}' | tr -d '()')
+          echo "DEVICE_ID=$DEVICE_ID" >> $GITHUB_ENV
+          echo "DEVICE_ID=$DEVICE_ID"
+          xcrun simctl boot $DEVICE_ID
+
+      - name: Build all library binaries and place them
+        run: |
+          melos run build:apple
+          melos run copylib:ios
+          melos run copylib:macos
 
       - run: flutter config --enable-macos-desktop
       - run: flutter pub get
