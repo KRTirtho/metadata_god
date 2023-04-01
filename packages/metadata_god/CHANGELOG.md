@@ -1,3 +1,10 @@
+## 0.4.1
+
+ - **FIX**: rename Image to Picture to resolve name conflict with material Image.
+ - **FIX**: export Image type.
+ - **FIX**: hide internal api getter.
+ - **FIX**: build file release tag version.
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
