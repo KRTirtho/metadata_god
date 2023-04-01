@@ -14,10 +14,10 @@ typedef struct wire_uint_8_list {
   int32_t len;
 } wire_uint_8_list;
 
-typedef struct wire_Image {
+typedef struct wire_Picture {
   struct wire_uint_8_list *mime_type;
   struct wire_uint_8_list *data;
-} wire_Image;
+} wire_Picture;
 
 typedef struct wire_Metadata {
   struct wire_uint_8_list *title;
@@ -31,7 +31,7 @@ typedef struct wire_Metadata {
   uint16_t *disc_total;
   int32_t *year;
   struct wire_uint_8_list *genre;
-  struct wire_Image *picture;
+  struct wire_Picture *picture;
   uint64_t *file_size;
 } wire_Metadata;
 
@@ -57,9 +57,9 @@ double *new_box_autoadd_f64_0(double value);
 
 int32_t *new_box_autoadd_i32_0(int32_t value);
 
-struct wire_Image *new_box_autoadd_image_0(void);
-
 struct wire_Metadata *new_box_autoadd_metadata_0(void);
+
+struct wire_Picture *new_box_autoadd_picture_0(void);
 
 uint16_t *new_box_autoadd_u16_0(uint16_t value);
 
@@ -75,8 +75,8 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) wire_write_metadata);
     dummy_var ^= ((int64_t) (void*) new_box_autoadd_f64_0);
     dummy_var ^= ((int64_t) (void*) new_box_autoadd_i32_0);
-    dummy_var ^= ((int64_t) (void*) new_box_autoadd_image_0);
     dummy_var ^= ((int64_t) (void*) new_box_autoadd_metadata_0);
+    dummy_var ^= ((int64_t) (void*) new_box_autoadd_picture_0);
     dummy_var ^= ((int64_t) (void*) new_box_autoadd_u16_0);
     dummy_var ^= ((int64_t) (void*) new_box_autoadd_u64_0);
     dummy_var ^= ((int64_t) (void*) new_uint_8_list_0);

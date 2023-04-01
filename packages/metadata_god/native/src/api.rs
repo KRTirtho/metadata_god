@@ -1,8 +1,8 @@
 use anyhow::Result;
-use audiotags::{MimeType, Picture, Tag};
+use audiotags::{MimeType, Tag};
 
 #[derive(Debug)]
-pub struct Image {
+pub struct Picture {
     /// The picture's MIME type.
     pub mime_type: String,
     /// The image data.
@@ -22,7 +22,7 @@ pub struct Metadata {
     pub disc_total: Option<u16>,
     pub year: Option<i32>,
     pub genre: Option<String>,
-    pub picture: Option<Image>,
+    pub picture: Option<Picture>,
     pub file_size: Option<u64>,
 }
 
@@ -42,7 +42,7 @@ pub fn read_metadata(file: String) -> Result<Metadata> {
         year: tag.year(),
         genre: tag.genre().and_then(|s| Some(s.to_string())),
         picture: (match cover {
-            Some(cover) => Some(Image {
+            Some(cover) => Some(Picture {
                 mime_type: String::from(cover.mime_type),
                 data: cover.data.to_vec(),
             }),
@@ -87,7 +87,7 @@ pub fn write_metadata(file: String, metadata: Metadata) -> Result<()> {
     }
     if metadata.picture.is_some() {
         let image = metadata.picture.unwrap();
-        tag.set_album_cover(Picture {
+        tag.set_album_cover(audiotags::Picture {
             mime_type: MimeType::try_from(image.mime_type.as_str()).unwrap(),
             data: &image.data,
         });

@@ -32,16 +32,16 @@ class MetadataGodPlatform extends FlutterRustBridgeBase<MetadataGodWire> {
   }
 
   @protected
-  ffi.Pointer<wire_Image> api2wire_box_autoadd_image(Image raw) {
-    final ptr = inner.new_box_autoadd_image_0();
-    _api_fill_to_wire_image(raw, ptr.ref);
+  ffi.Pointer<wire_Metadata> api2wire_box_autoadd_metadata(Metadata raw) {
+    final ptr = inner.new_box_autoadd_metadata_0();
+    _api_fill_to_wire_metadata(raw, ptr.ref);
     return ptr;
   }
 
   @protected
-  ffi.Pointer<wire_Metadata> api2wire_box_autoadd_metadata(Metadata raw) {
-    final ptr = inner.new_box_autoadd_metadata_0();
-    _api_fill_to_wire_metadata(raw, ptr.ref);
+  ffi.Pointer<wire_Picture> api2wire_box_autoadd_picture(Picture raw) {
+    final ptr = inner.new_box_autoadd_picture_0();
+    _api_fill_to_wire_picture(raw, ptr.ref);
     return ptr;
   }
 
@@ -71,8 +71,8 @@ class MetadataGodPlatform extends FlutterRustBridgeBase<MetadataGodWire> {
   }
 
   @protected
-  ffi.Pointer<wire_Image> api2wire_opt_box_autoadd_image(Image? raw) {
-    return raw == null ? ffi.nullptr : api2wire_box_autoadd_image(raw);
+  ffi.Pointer<wire_Picture> api2wire_opt_box_autoadd_picture(Picture? raw) {
+    return raw == null ? ffi.nullptr : api2wire_box_autoadd_picture(raw);
   }
 
   @protected
@@ -100,19 +100,14 @@ class MetadataGodPlatform extends FlutterRustBridgeBase<MetadataGodWire> {
 
 // Section: api_fill_to_wire
 
-  void _api_fill_to_wire_box_autoadd_image(
-      Image apiObj, ffi.Pointer<wire_Image> wireObj) {
-    _api_fill_to_wire_image(apiObj, wireObj.ref);
-  }
-
   void _api_fill_to_wire_box_autoadd_metadata(
       Metadata apiObj, ffi.Pointer<wire_Metadata> wireObj) {
     _api_fill_to_wire_metadata(apiObj, wireObj.ref);
   }
 
-  void _api_fill_to_wire_image(Image apiObj, wire_Image wireObj) {
-    wireObj.mime_type = api2wire_String(apiObj.mimeType);
-    wireObj.data = api2wire_uint_8_list(apiObj.data);
+  void _api_fill_to_wire_box_autoadd_picture(
+      Picture apiObj, ffi.Pointer<wire_Picture> wireObj) {
+    _api_fill_to_wire_picture(apiObj, wireObj.ref);
   }
 
   void _api_fill_to_wire_metadata(Metadata apiObj, wire_Metadata wireObj) {
@@ -127,13 +122,18 @@ class MetadataGodPlatform extends FlutterRustBridgeBase<MetadataGodWire> {
     wireObj.disc_total = api2wire_opt_box_autoadd_u16(apiObj.discTotal);
     wireObj.year = api2wire_opt_box_autoadd_i32(apiObj.year);
     wireObj.genre = api2wire_opt_String(apiObj.genre);
-    wireObj.picture = api2wire_opt_box_autoadd_image(apiObj.picture);
+    wireObj.picture = api2wire_opt_box_autoadd_picture(apiObj.picture);
     wireObj.file_size = api2wire_opt_box_autoadd_u64(apiObj.fileSize);
   }
 
-  void _api_fill_to_wire_opt_box_autoadd_image(
-      Image? apiObj, ffi.Pointer<wire_Image> wireObj) {
-    if (apiObj != null) _api_fill_to_wire_box_autoadd_image(apiObj, wireObj);
+  void _api_fill_to_wire_opt_box_autoadd_picture(
+      Picture? apiObj, ffi.Pointer<wire_Picture> wireObj) {
+    if (apiObj != null) _api_fill_to_wire_box_autoadd_picture(apiObj, wireObj);
+  }
+
+  void _api_fill_to_wire_picture(Picture apiObj, wire_Picture wireObj) {
+    wireObj.mime_type = api2wire_String(apiObj.mimeType);
+    wireObj.data = api2wire_uint_8_list(apiObj.data);
   }
 }
 
@@ -298,16 +298,6 @@ class MetadataGodWire implements FlutterRustBridgeWireBase {
   late final _new_box_autoadd_i32_0 = _new_box_autoadd_i32_0Ptr
       .asFunction<ffi.Pointer<ffi.Int32> Function(int)>();
 
-  ffi.Pointer<wire_Image> new_box_autoadd_image_0() {
-    return _new_box_autoadd_image_0();
-  }
-
-  late final _new_box_autoadd_image_0Ptr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<wire_Image> Function()>>(
-          'new_box_autoadd_image_0');
-  late final _new_box_autoadd_image_0 = _new_box_autoadd_image_0Ptr
-      .asFunction<ffi.Pointer<wire_Image> Function()>();
-
   ffi.Pointer<wire_Metadata> new_box_autoadd_metadata_0() {
     return _new_box_autoadd_metadata_0();
   }
@@ -317,6 +307,16 @@ class MetadataGodWire implements FlutterRustBridgeWireBase {
           'new_box_autoadd_metadata_0');
   late final _new_box_autoadd_metadata_0 = _new_box_autoadd_metadata_0Ptr
       .asFunction<ffi.Pointer<wire_Metadata> Function()>();
+
+  ffi.Pointer<wire_Picture> new_box_autoadd_picture_0() {
+    return _new_box_autoadd_picture_0();
+  }
+
+  late final _new_box_autoadd_picture_0Ptr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<wire_Picture> Function()>>(
+          'new_box_autoadd_picture_0');
+  late final _new_box_autoadd_picture_0 = _new_box_autoadd_picture_0Ptr
+      .asFunction<ffi.Pointer<wire_Picture> Function()>();
 
   ffi.Pointer<ffi.Uint16> new_box_autoadd_u16_0(
     int value,
@@ -385,7 +385,7 @@ class wire_uint_8_list extends ffi.Struct {
   external int len;
 }
 
-class wire_Image extends ffi.Struct {
+class wire_Picture extends ffi.Struct {
   external ffi.Pointer<wire_uint_8_list> mime_type;
 
   external ffi.Pointer<wire_uint_8_list> data;
@@ -414,7 +414,7 @@ class wire_Metadata extends ffi.Struct {
 
   external ffi.Pointer<wire_uint_8_list> genre;
 
-  external ffi.Pointer<wire_Image> picture;
+  external ffi.Pointer<wire_Picture> picture;
 
   external ffi.Pointer<ffi.Uint64> file_size;
 }

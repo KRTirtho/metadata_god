@@ -36,13 +36,13 @@ class MetadataGodPlatform extends FlutterRustBridgeBase<MetadataGodWire>
   }
 
   @protected
-  List<dynamic> api2wire_box_autoadd_image(Image raw) {
-    return api2wire_image(raw);
+  List<dynamic> api2wire_box_autoadd_metadata(Metadata raw) {
+    return api2wire_metadata(raw);
   }
 
   @protected
-  List<dynamic> api2wire_box_autoadd_metadata(Metadata raw) {
-    return api2wire_metadata(raw);
+  List<dynamic> api2wire_box_autoadd_picture(Picture raw) {
+    return api2wire_picture(raw);
   }
 
   @protected
@@ -53,11 +53,6 @@ class MetadataGodPlatform extends FlutterRustBridgeBase<MetadataGodWire>
   @protected
   Object api2wire_box_autoadd_u64(int raw) {
     return api2wire_u64(raw);
-  }
-
-  @protected
-  List<dynamic> api2wire_image(Image raw) {
-    return [api2wire_String(raw.mimeType), api2wire_uint_8_list(raw.data)];
   }
 
   @protected
@@ -74,7 +69,7 @@ class MetadataGodPlatform extends FlutterRustBridgeBase<MetadataGodWire>
       api2wire_opt_box_autoadd_u16(raw.discTotal),
       api2wire_opt_box_autoadd_i32(raw.year),
       api2wire_opt_String(raw.genre),
-      api2wire_opt_box_autoadd_image(raw.picture),
+      api2wire_opt_box_autoadd_picture(raw.picture),
       api2wire_opt_box_autoadd_u64(raw.fileSize)
     ];
   }
@@ -95,8 +90,8 @@ class MetadataGodPlatform extends FlutterRustBridgeBase<MetadataGodWire>
   }
 
   @protected
-  List<dynamic>? api2wire_opt_box_autoadd_image(Image? raw) {
-    return raw == null ? null : api2wire_box_autoadd_image(raw);
+  List<dynamic>? api2wire_opt_box_autoadd_picture(Picture? raw) {
+    return raw == null ? null : api2wire_box_autoadd_picture(raw);
   }
 
   @protected
@@ -107,6 +102,11 @@ class MetadataGodPlatform extends FlutterRustBridgeBase<MetadataGodWire>
   @protected
   Object? api2wire_opt_box_autoadd_u64(int? raw) {
     return raw == null ? null : api2wire_box_autoadd_u64(raw);
+  }
+
+  @protected
+  List<dynamic> api2wire_picture(Picture raw) {
+    return [api2wire_String(raw.mimeType), api2wire_uint_8_list(raw.data)];
   }
 
   @protected

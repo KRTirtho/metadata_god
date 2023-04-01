@@ -27,19 +27,6 @@ abstract class MetadataGod {
   FlutterRustBridgeTaskConstMeta get kWriteMetadataConstMeta;
 }
 
-class Image {
-  /// The picture's MIME type.
-  final String mimeType;
-
-  /// The image data.
-  final Uint8List data;
-
-  const Image({
-    required this.mimeType,
-    required this.data,
-  });
-}
-
 class Metadata {
   final String? title;
   final double? durationMs;
@@ -52,7 +39,7 @@ class Metadata {
   final int? discTotal;
   final int? year;
   final String? genre;
-  final Image? picture;
+  final Picture? picture;
   final int? fileSize;
 
   const Metadata({
@@ -69,6 +56,19 @@ class Metadata {
     this.genre,
     this.picture,
     this.fileSize,
+  });
+}
+
+class Picture {
+  /// The picture's MIME type.
+  final String mimeType;
+
+  /// The image data.
+  final Uint8List data;
+
+  const Picture({
+    required this.mimeType,
+    required this.data,
   });
 }
 
@@ -135,8 +135,8 @@ class MetadataGodImpl implements MetadataGod {
     return raw as int;
   }
 
-  Image _wire2api_box_autoadd_image(dynamic raw) {
-    return _wire2api_image(raw);
+  Picture _wire2api_box_autoadd_picture(dynamic raw) {
+    return _wire2api_picture(raw);
   }
 
   int _wire2api_box_autoadd_u16(dynamic raw) {
@@ -155,16 +155,6 @@ class MetadataGodImpl implements MetadataGod {
     return raw as int;
   }
 
-  Image _wire2api_image(dynamic raw) {
-    final arr = raw as List<dynamic>;
-    if (arr.length != 2)
-      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
-    return Image(
-      mimeType: _wire2api_String(arr[0]),
-      data: _wire2api_uint_8_list(arr[1]),
-    );
-  }
-
   Metadata _wire2api_metadata(dynamic raw) {
     final arr = raw as List<dynamic>;
     if (arr.length != 13)
@@ -181,7 +171,7 @@ class MetadataGodImpl implements MetadataGod {
       discTotal: _wire2api_opt_box_autoadd_u16(arr[8]),
       year: _wire2api_opt_box_autoadd_i32(arr[9]),
       genre: _wire2api_opt_String(arr[10]),
-      picture: _wire2api_opt_box_autoadd_image(arr[11]),
+      picture: _wire2api_opt_box_autoadd_picture(arr[11]),
       fileSize: _wire2api_opt_box_autoadd_u64(arr[12]),
     );
   }
@@ -198,8 +188,8 @@ class MetadataGodImpl implements MetadataGod {
     return raw == null ? null : _wire2api_box_autoadd_i32(raw);
   }
 
-  Image? _wire2api_opt_box_autoadd_image(dynamic raw) {
-    return raw == null ? null : _wire2api_box_autoadd_image(raw);
+  Picture? _wire2api_opt_box_autoadd_picture(dynamic raw) {
+    return raw == null ? null : _wire2api_box_autoadd_picture(raw);
   }
 
   int? _wire2api_opt_box_autoadd_u16(dynamic raw) {
@@ -208,6 +198,16 @@ class MetadataGodImpl implements MetadataGod {
 
   int? _wire2api_opt_box_autoadd_u64(dynamic raw) {
     return raw == null ? null : _wire2api_box_autoadd_u64(raw);
+  }
+
+  Picture _wire2api_picture(dynamic raw) {
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return Picture(
+      mimeType: _wire2api_String(arr[0]),
+      data: _wire2api_uint_8_list(arr[1]),
+    );
   }
 
   int _wire2api_u16(dynamic raw) {

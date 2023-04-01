@@ -104,13 +104,6 @@ impl Wire2Api<u8> for u8 {
 
 // Section: impl IntoDart
 
-impl support::IntoDart for Image {
-    fn into_dart(self) -> support::DartAbi {
-        vec![self.mime_type.into_dart(), self.data.into_dart()].into_dart()
-    }
-}
-impl support::IntoDartExceptPrimitive for Image {}
-
 impl support::IntoDart for Metadata {
     fn into_dart(self) -> support::DartAbi {
         vec![
@@ -132,6 +125,13 @@ impl support::IntoDart for Metadata {
     }
 }
 impl support::IntoDartExceptPrimitive for Metadata {}
+
+impl support::IntoDart for Picture {
+    fn into_dart(self) -> support::DartAbi {
+        vec![self.mime_type.into_dart(), self.data.into_dart()].into_dart()
+    }
+}
+impl support::IntoDartExceptPrimitive for Picture {}
 
 // Section: executor
 
@@ -167,21 +167,6 @@ mod web {
         }
     }
 
-    impl Wire2Api<Image> for JsValue {
-        fn wire2api(self) -> Image {
-            let self_ = self.dyn_into::<JsArray>().unwrap();
-            assert_eq!(
-                self_.length(),
-                2,
-                "Expected 2 elements, got {}",
-                self_.length()
-            );
-            Image {
-                mime_type: self_.get(0).wire2api(),
-                data: self_.get(1).wire2api(),
-            }
-        }
-    }
     impl Wire2Api<Metadata> for JsValue {
         fn wire2api(self) -> Metadata {
             let self_ = self.dyn_into::<JsArray>().unwrap();
@@ -214,9 +199,25 @@ mod web {
         }
     }
 
-    impl Wire2Api<Option<Image>> for JsValue {
-        fn wire2api(self) -> Option<Image> {
+    impl Wire2Api<Option<Picture>> for JsValue {
+        fn wire2api(self) -> Option<Picture> {
             (!self.is_undefined() && !self.is_null()).then(|| self.wire2api())
+        }
+    }
+
+    impl Wire2Api<Picture> for JsValue {
+        fn wire2api(self) -> Picture {
+            let self_ = self.dyn_into::<JsArray>().unwrap();
+            assert_eq!(
+                self_.length(),
+                2,
+                "Expected 2 elements, got {}",
+                self_.length()
+            );
+            Picture {
+                mime_type: self_.get(0).wire2api(),
+                data: self_.get(1).wire2api(),
+            }
         }
     }
 
@@ -323,13 +324,13 @@ mod io {
     }
 
     #[no_mangle]
-    pub extern "C" fn new_box_autoadd_image_0() -> *mut wire_Image {
-        support::new_leak_box_ptr(wire_Image::new_with_null_ptr())
+    pub extern "C" fn new_box_autoadd_metadata_0() -> *mut wire_Metadata {
+        support::new_leak_box_ptr(wire_Metadata::new_with_null_ptr())
     }
 
     #[no_mangle]
-    pub extern "C" fn new_box_autoadd_metadata_0() -> *mut wire_Metadata {
-        support::new_leak_box_ptr(wire_Metadata::new_with_null_ptr())
+    pub extern "C" fn new_box_autoadd_picture_0() -> *mut wire_Picture {
+        support::new_leak_box_ptr(wire_Picture::new_with_null_ptr())
     }
 
     #[no_mangle]
@@ -371,16 +372,16 @@ mod io {
             unsafe { *support::box_from_leak_ptr(self) }
         }
     }
-    impl Wire2Api<Image> for *mut wire_Image {
-        fn wire2api(self) -> Image {
-            let wrap = unsafe { support::box_from_leak_ptr(self) };
-            Wire2Api::<Image>::wire2api(*wrap).into()
-        }
-    }
     impl Wire2Api<Metadata> for *mut wire_Metadata {
         fn wire2api(self) -> Metadata {
             let wrap = unsafe { support::box_from_leak_ptr(self) };
             Wire2Api::<Metadata>::wire2api(*wrap).into()
+        }
+    }
+    impl Wire2Api<Picture> for *mut wire_Picture {
+        fn wire2api(self) -> Picture {
+            let wrap = unsafe { support::box_from_leak_ptr(self) };
+            Wire2Api::<Picture>::wire2api(*wrap).into()
         }
     }
     impl Wire2Api<u16> for *mut u16 {
@@ -394,14 +395,6 @@ mod io {
         }
     }
 
-    impl Wire2Api<Image> for wire_Image {
-        fn wire2api(self) -> Image {
-            Image {
-                mime_type: self.mime_type.wire2api(),
-                data: self.data.wire2api(),
-            }
-        }
-    }
     impl Wire2Api<Metadata> for wire_Metadata {
         fn wire2api(self) -> Metadata {
             Metadata {
@@ -422,6 +415,15 @@ mod io {
         }
     }
 
+    impl Wire2Api<Picture> for wire_Picture {
+        fn wire2api(self) -> Picture {
+            Picture {
+                mime_type: self.mime_type.wire2api(),
+                data: self.data.wire2api(),
+            }
+        }
+    }
+
     impl Wire2Api<Vec<u8>> for *mut wire_uint_8_list {
         fn wire2api(self) -> Vec<u8> {
             unsafe {
@@ -431,13 +433,6 @@ mod io {
         }
     }
     // Section: wire structs
-
-    #[repr(C)]
-    #[derive(Clone)]
-    pub struct wire_Image {
-        mime_type: *mut wire_uint_8_list,
-        data: *mut wire_uint_8_list,
-    }
 
     #[repr(C)]
     #[derive(Clone)]
@@ -453,8 +448,15 @@ mod io {
         disc_total: *mut u16,
         year: *mut i32,
         genre: *mut wire_uint_8_list,
-        picture: *mut wire_Image,
+        picture: *mut wire_Picture,
         file_size: *mut u64,
+    }
+
+    #[repr(C)]
+    #[derive(Clone)]
+    pub struct wire_Picture {
+        mime_type: *mut wire_uint_8_list,
+        data: *mut wire_uint_8_list,
     }
 
     #[repr(C)]
@@ -473,21 +475,6 @@ mod io {
     impl<T> NewWithNullPtr for *mut T {
         fn new_with_null_ptr() -> Self {
             std::ptr::null_mut()
-        }
-    }
-
-    impl NewWithNullPtr for wire_Image {
-        fn new_with_null_ptr() -> Self {
-            Self {
-                mime_type: core::ptr::null_mut(),
-                data: core::ptr::null_mut(),
-            }
-        }
-    }
-
-    impl Default for wire_Image {
-        fn default() -> Self {
-            Self::new_with_null_ptr()
         }
     }
 
@@ -512,6 +499,21 @@ mod io {
     }
 
     impl Default for wire_Metadata {
+        fn default() -> Self {
+            Self::new_with_null_ptr()
+        }
+    }
+
+    impl NewWithNullPtr for wire_Picture {
+        fn new_with_null_ptr() -> Self {
+            Self {
+                mime_type: core::ptr::null_mut(),
+                data: core::ptr::null_mut(),
+            }
+        }
+    }
+
+    impl Default for wire_Picture {
         fn default() -> Self {
             Self::new_with_null_ptr()
         }
