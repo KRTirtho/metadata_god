@@ -4,7 +4,7 @@ release_tag_name = 'v0.4.1' # generated; do not edit
 # so we have to fetch the correct version here.
 framework_name = 'MetadataGod.xcframework'
 remote_zip_name = "#{framework_name}.zip"
-url = "https://github.com/KRTirtho/metadata_god/releases/download/#{release_tag_name}/#{remote_zip_name}"
+url = "https://github.com/FriederHannenheim/metadata_god/releases/download/#{release_tag_name}/#{remote_zip_name}"
 local_zip_name = "#{release_tag_name}.zip"
 `
 cd Frameworks
