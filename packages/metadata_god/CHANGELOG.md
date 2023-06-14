@@ -1,10 +1,3 @@
-## 0.4.1+1
-
- - **FIX**: rename Image to Picture to resolve name conflict with material Image.
- - **FIX**: export Image type.
- - **FIX**: hide internal api getter.
- - **FIX**: build file release tag version.
-
 ## 0.4.1
 
  - **FIX**: rename `Image` to `Picture` to resolve name conflict with material Image.
