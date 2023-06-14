@@ -15,7 +15,8 @@ jobs:
   publish_github_release:
     # macOS because we can cross-compile to all other platforms from it
     runs-on: macos-latest
-
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
