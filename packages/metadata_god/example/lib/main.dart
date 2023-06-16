@@ -96,7 +96,14 @@ class _MyAppState extends State<MyApp> {
                             final result = await FilePicker.platform.pickFiles(
                               allowCompression: false,
                               allowMultiple: false,
-                              allowedExtensions: ["m4a", "mp3", 'flac', 'ogg'],
+                              allowedExtensions: [
+                                "m4a",
+                                "mp3",
+                                'flac',
+                                'ogg',
+                                'aiff',
+                                'wav'
+                              ],
                               withData: false,
                               withReadStream: false,
                             );
