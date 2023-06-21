@@ -1,6 +1,6 @@
 name: metadata_god
 description: Plugin for retrieving and writing audio tags/metadata from audio files
-version: 0.5.0+1
+version: 0.5.0+2
 repository: https://github.com/KRTirtho/metadata_god/blob/main/packages/metadata_god
 homepage: https://github.com/KRTirtho/metadata_god
 

@@ -1,3 +1,7 @@
+## 0.5.0+2
+
+ - **FIX**: add branch main because to Cargo.toml because it won't use that by default for some godforsaken reason.
+
 ## 0.5.0+1
 
  - **FIX**: I found out how melos works (hopefully).

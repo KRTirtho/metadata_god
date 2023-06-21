@@ -15,6 +15,27 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`metadata_god` - `v0.5.0+2`](#metadata_god---v0502)
+
+---
+
+#### `metadata_god` - `v0.5.0+2`
+
+ - **FIX**: add branch main because to Cargo.toml because it won't use that by default for some godforsaken reason.
+
+
+## 2023-06-21
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`metadata_god` - `v0.5.0+1`](#metadata_god---v0501)
 
 ---
