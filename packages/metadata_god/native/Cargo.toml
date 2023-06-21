@@ -12,4 +12,4 @@ flutter_rust_bridge_codegen = "1.72.*"
 [dependencies]
 flutter_rust_bridge = "1.72.*"
 anyhow = "1"
-lofty = "0.13.0"
+lofty = { git = "https://github.com/FriederHannenheim/lofty-rs.git" }
