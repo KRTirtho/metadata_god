@@ -1,3 +1,7 @@
+## 0.5.0+1
+
+ - **FIX**: I found out how melos works (hopefully).
+
 ## 0.4.1+1
 
  - **FIX**: rename Image to Picture to resolve name conflict with material Image.
