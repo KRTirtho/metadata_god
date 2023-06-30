@@ -24,7 +24,6 @@ Packages with other changes:
 
  - **REFACTOR**: use lofty-rs for metadata instead of audiotags ([#21](https://github.com/KRTirtho/metadata_god/issues/21)).
  - **FIX**: add branch main because to Cargo.toml because it won't use that by default for some godforsaken reason.
- - **FIX**: I found out how melos works (hopefully).
 
 
 ## 2023-04-01
