@@ -10,6 +10,6 @@ crate-type = ["staticlib", "cdylib"]
 flutter_rust_bridge_codegen = "1.72.*"
 
 [dependencies]
-flutter_rust_bridge = "1.72.*"
+flutter_rust_bridge = "1.78.*"
 anyhow = "1"
 lofty = { git = "https://github.com/FriederHannenheim/lofty-rs.git" }
