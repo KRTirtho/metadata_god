@@ -1,5 +1,5 @@
 use anyhow::Result;
-use audiotags::{MimeType, Tag};
+use lofty::{Accessor, AudioFile, PictureType, Tag, TaggedFile, TaggedFileExt, MimeType, TagExt, ItemKey, ItemValue, TagItem};
 
 #[derive(Debug)]
 pub struct Picture {
@@ -27,24 +27,32 @@ pub struct Metadata {
 }
 
 pub fn read_metadata(file: String) -> Result<Metadata> {
-    let tag = Tag::default().read_from_path(&file)?;
-    let cover = tag.album_cover();
+    let (tagged_file, tag) = get_tag_for_file(&file)?;
+    let cover = tag
+        .get_picture_type(PictureType::CoverFront)
+        .or(tag.pictures().first());
     Ok(Metadata {
         title: tag.title().and_then(|s| Some(s.to_string())),
-        duration_ms: tag.duration(),
-        album: tag.album_title().and_then(|s| Some(s.to_string())),
-        album_artist: tag.album_artist().and_then(|s| Some(s.to_string())),
+        duration_ms: Some(tagged_file.properties().duration().as_millis() as f64),
+        album: tag.album().and_then(|s| Some(s.to_string())),
+        album_artist: tag.get(&ItemKey::AlbumArtist).and_then(|s| {
+                match s.value() {
+                    ItemValue::Text(t) => Some(t.to_string()),
+                    _ => None
+                }
+            }
+        ),
         artist: tag.artist().and_then(|s| Some(s.to_string())),
-        track_number: tag.track_number(),
-        track_total: tag.total_tracks(),
-        disc_number: tag.disc_number(),
-        disc_total: tag.total_discs(),
-        year: tag.year(),
+        track_number: tag.track().map(|f| f as u16),
+        track_total: tag.track_total().map(|f| f as u16),
+        disc_number: tag.disk().map(|f| f as u16),
+        disc_total: tag.disk_total().map(|f| f as u16),
+        year: tag.year().map(|f| f as i32),
         genre: tag.genre().and_then(|s| Some(s.to_string())),
         picture: (match cover {
             Some(cover) => Some(Picture {
-                mime_type: String::from(cover.mime_type),
-                data: cover.data.to_vec(),
+                mime_type: cover.mime_type().to_string(),
+                data: cover.data().to_vec(),
             }),
             None => None,
         }),
@@ -53,46 +61,70 @@ pub fn read_metadata(file: String) -> Result<Metadata> {
 }
 
 pub fn write_metadata(file: String, metadata: Metadata) -> Result<()> {
-    let mut tag = Tag::default().read_from_path(&file)?;
+    let (_tagged_file, mut tag) = get_tag_for_file(&file)?;
 
     if metadata.title.is_some() {
-        tag.set_title(metadata.title.unwrap().as_str());
+        tag.set_title(metadata.title.unwrap());
     }
     if metadata.album.is_some() {
-        tag.set_album_title(metadata.album.unwrap().as_str());
+        tag.set_album(metadata.album.unwrap());
     }
     if metadata.album_artist.is_some() {
-        tag.set_album_artist(metadata.album_artist.unwrap().as_str());
+        tag.insert(TagItem::new(ItemKey::AlbumArtist, ItemValue::Text(metadata.album_artist.unwrap())));
     }
     if metadata.artist.is_some() {
-        tag.set_artist(metadata.artist.unwrap().as_str());
+        tag.set_artist(metadata.artist.unwrap());
     }
     if metadata.track_number.is_some() {
-        tag.set_track_number(metadata.track_number.unwrap());
+        tag.set_track(metadata.track_number.unwrap() as u32);
     }
     if metadata.track_total.is_some() {
-        tag.set_total_tracks(metadata.track_total.unwrap());
+        tag.set_track_total(metadata.track_total.unwrap() as u32);
     }
     if metadata.disc_number.is_some() {
-        tag.set_disc_number(metadata.disc_number.unwrap());
+        tag.set_disk(metadata.disc_number.unwrap() as u32);
     }
     if metadata.disc_total.is_some() {
-        tag.set_total_discs(metadata.disc_total.unwrap());
+        tag.set_disk_total(metadata.disc_total.unwrap() as u32);
     }
     if metadata.year.is_some() {
-        tag.set_year(metadata.year.unwrap());
+        tag.set_year(metadata.year.unwrap() as u32);
     }
     if metadata.genre.is_some() {
-        tag.set_genre(metadata.genre.unwrap().as_str());
+        tag.set_genre(metadata.genre.unwrap());
     }
     if metadata.picture.is_some() {
         let image = metadata.picture.unwrap();
-        tag.set_album_cover(audiotags::Picture {
-            mime_type: MimeType::try_from(image.mime_type.as_str()).unwrap(),
-            data: &image.data,
-        });
+        tag.push_picture(lofty::Picture::new_unchecked(
+            PictureType::CoverFront,
+            MimeType::from_str(&image.mime_type),
+            None,
+            image.data,
+        ));
     }
 
-    tag.write_to_path(&file)?;
+    tag.save_to_path(&file)?;
     Ok(())
+}
+
+fn get_tag_for_file(file: &str) -> Result<(TaggedFile, Tag)> {
+    let mut tagged_file = lofty::read_from_path(file)?;
+
+    let tag = match tagged_file.primary_tag_mut() {
+        Some(primary_tag) => primary_tag,
+        None => {
+            if let Some(first_tag) = tagged_file.first_tag_mut() {
+                first_tag
+            } else {
+                let tag_type = tagged_file.primary_tag_type();
+
+                eprintln!("WARN: No tags found, creating a new tag of type `{tag_type:?}`");
+                tagged_file.insert_tag(Tag::new(tag_type));
+
+                tagged_file.primary_tag_mut().unwrap()
+            }
+        }
+    }
+    .to_owned();
+    Ok((tagged_file, tag))
 }
