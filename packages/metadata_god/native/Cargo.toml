@@ -1,15 +1,15 @@
 [package]
 name = "metadata_god"
-version = "0.4.1"
+version = "0.5.0"
 edition = "2021"
 
 [lib]
 crate-type = ["staticlib", "cdylib"]
 
 [build-dependencies]
-flutter_rust_bridge_codegen = "1.72.*"
+flutter_rust_bridge_codegen = "1.80.*"
 
 [dependencies]
-flutter_rust_bridge = "1.72.*"
+flutter_rust_bridge = "1.80.*"
 anyhow = "1"
-lofty = { git = "https://github.com/FriederHannenheim/lofty-rs.git" }
+lofty = "0.15.*"
