@@ -1,3 +1,7 @@
+## 0.5.1
+
+ - **FEAT**: failsafe writing metadata.
+
 ## 0.5.0
 
  - cc
