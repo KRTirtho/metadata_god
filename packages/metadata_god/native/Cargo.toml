@@ -7,9 +7,9 @@ edition = "2021"
 crate-type = ["staticlib", "cdylib"]
 
 [build-dependencies]
-flutter_rust_bridge_codegen = "1.80.*"
+flutter_rust_bridge_codegen = "1.82.*"
 
 [dependencies]
-flutter_rust_bridge = "1.80.*"
+flutter_rust_bridge = "1.82.*"
 anyhow = "1"
 lofty = "0.15.*"
