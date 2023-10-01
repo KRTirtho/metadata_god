@@ -1,5 +1,8 @@
-use anyhow::Result;
-use lofty::{Accessor, AudioFile, PictureType, Tag, TaggedFile, TaggedFileExt, MimeType, TagExt, ItemKey, ItemValue, TagItem};
+use anyhow::{anyhow, Result};
+use lofty::{
+    Accessor, AudioFile, FileProperties, ItemKey, ItemValue, MimeType, PictureType, Tag, TagExt,
+    TagItem, TaggedFile, TaggedFileExt,
+};
 
 #[derive(Debug)]
 pub struct Picture {
@@ -35,13 +38,12 @@ pub fn read_metadata(file: String) -> Result<Metadata> {
         title: tag.title().and_then(|s| Some(s.to_string())),
         duration_ms: Some(tagged_file.properties().duration().as_millis() as f64),
         album: tag.album().and_then(|s| Some(s.to_string())),
-        album_artist: tag.get(&ItemKey::AlbumArtist).and_then(|s| {
-                match s.value() {
-                    ItemValue::Text(t) => Some(t.to_string()),
-                    _ => None
-                }
-            }
-        ),
+        album_artist: tag
+            .get(&ItemKey::AlbumArtist)
+            .and_then(|s| match s.value() {
+                ItemValue::Text(t) => Some(t.to_string()),
+                _ => None,
+            }),
         artist: tag.artist().and_then(|s| Some(s.to_string())),
         track_number: tag.track().map(|f| f as u16),
         track_total: tag.track_total().map(|f| f as u16),
@@ -61,7 +63,7 @@ pub fn read_metadata(file: String) -> Result<Metadata> {
 }
 
 pub fn write_metadata(file: String, metadata: Metadata) -> Result<()> {
-    let (_tagged_file, mut tag) = get_tag_for_file(&file)?;
+    let (_tagged_file, mut tag) = open_or_create_tag_for_file(&file)?;
 
     if metadata.title.is_some() {
         tag.set_title(metadata.title.unwrap());
@@ -70,7 +72,10 @@ pub fn write_metadata(file: String, metadata: Metadata) -> Result<()> {
         tag.set_album(metadata.album.unwrap());
     }
     if metadata.album_artist.is_some() {
-        tag.insert(TagItem::new(ItemKey::AlbumArtist, ItemValue::Text(metadata.album_artist.unwrap())));
+        tag.insert(TagItem::new(
+            ItemKey::AlbumArtist,
+            ItemValue::Text(metadata.album_artist.unwrap()),
+        ));
     }
     if metadata.artist.is_some() {
         tag.set_artist(metadata.artist.unwrap());
@@ -105,6 +110,39 @@ pub fn write_metadata(file: String, metadata: Metadata) -> Result<()> {
 
     tag.save_to_path(&file)?;
     Ok(())
+}
+
+fn open_or_create_tag_for_file(file: &str) -> Result<(TaggedFile, Tag)> {
+    let mut tagged_file = match lofty::read_from_path(file) {
+        Ok(tagged_file) => tagged_file,
+        _ => {
+            let prob = lofty::Probe::open(file)?;
+
+            if prob.file_type().is_none() {
+                return Err(anyhow!("File type could not be determined"));
+            }
+
+            TaggedFile::new(prob.file_type().unwrap(), FileProperties::default(), vec![])
+        }
+    };
+
+    let tag = match tagged_file.primary_tag_mut() {
+        Some(primary_tag) => primary_tag,
+        None => {
+            if let Some(first_tag) = tagged_file.first_tag_mut() {
+                first_tag
+            } else {
+                let tag_type = tagged_file.primary_tag_type();
+
+                eprintln!("WARN: No tags found, creating a new tag of type `{tag_type:?}`");
+                tagged_file.insert_tag(Tag::new(tag_type));
+
+                tagged_file.primary_tag_mut().unwrap()
+            }
+        }
+    }
+    .to_owned();
+    Ok((tagged_file, tag))
 }
 
 fn get_tag_for_file(file: &str) -> Result<(TaggedFile, Tag)> {

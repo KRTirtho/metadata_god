@@ -1,3 +1,15 @@
+## 0.5.1
+
+ - **FEAT**: failsafe writing metadata.
+
+## 0.5.0
+
+ - cc
+
+ - **REFACTOR**: use lofty-rs for metadata instead of audiotags ([#21](https://github.com/KRTirtho/metadata_god/issues/21)).
+ - **FIX**: add branch main because to Cargo.toml because it won't use that by default for some godforsaken reason.
+ - **FIX**: I found out how melos works (hopefully).
+
 ## 0.4.1
 
  - **FIX**: rename `Image` to `Picture` to resolve name conflict with material Image.
