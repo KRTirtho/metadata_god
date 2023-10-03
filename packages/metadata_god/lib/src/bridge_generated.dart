@@ -84,18 +84,15 @@ class MetadataGodImpl implements MetadataGod {
       parseSuccessData: _wire2api_metadata,
       parseErrorData: _wire2api_FrbAnyhowException,
       constMeta: kReadMetadataConstMeta,
-      argValues: [
-        file
-      ],
+      argValues: [file],
       hint: hint,
+      parseErrorData: parseReturnedError,
     ));
   }
 
   FlutterRustBridgeTaskConstMeta get kReadMetadataConstMeta => const FlutterRustBridgeTaskConstMeta(
         debugName: "read_metadata",
-        argNames: [
-          "file"
-        ],
+        argNames: ["file"],
       );
 
   Future<void> writeMetadata({required String file, required Metadata metadata, dynamic hint}) {
@@ -106,20 +103,15 @@ class MetadataGodImpl implements MetadataGod {
       parseSuccessData: _wire2api_unit,
       parseErrorData: _wire2api_FrbAnyhowException,
       constMeta: kWriteMetadataConstMeta,
-      argValues: [
-        file,
-        metadata
-      ],
+      argValues: [file, metadata],
       hint: hint,
+      parseErrorData: parseReturnedError,
     ));
   }
 
   FlutterRustBridgeTaskConstMeta get kWriteMetadataConstMeta => const FlutterRustBridgeTaskConstMeta(
         debugName: "write_metadata",
-        argNames: [
-          "file",
-          "metadata"
-        ],
+        argNames: ["file", "metadata"],
       );
 
   void dispose() {
@@ -181,6 +173,11 @@ class MetadataGodImpl implements MetadataGod {
       picture: _wire2api_opt_box_autoadd_picture(arr[11]),
       fileSize: _wire2api_opt_box_autoadd_u64(arr[12]),
     );
+  }
+
+  String parseReturnedError(dynamic errorData) {
+    // Convert the error data to a string representation.
+    return errorData.toString();
   }
 
   String? _wire2api_opt_String(dynamic raw) {
