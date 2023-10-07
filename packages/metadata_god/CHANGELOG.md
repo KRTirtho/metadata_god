@@ -1,3 +1,13 @@
+## 0.5.2+1
+
+ - **REFACTOR**: use lofty-rs for metadata instead of audiotags ([#21](https://github.com/KRTirtho/metadata_god/issues/21)).
+ - **FIX**: invalid syntax.
+ - **FIX**: rename Image to Picture to resolve name conflict with material Image.
+ - **FIX**: export Image type.
+ - **FIX**: hide internal api getter.
+ - **FIX**: build file release tag version.
+ - **FEAT**: failsafe writing metadata.
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.

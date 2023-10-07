@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-10-07
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`metadata_god` - `v0.5.2+1`](#metadata_god---v0521)
+
+---
+
+#### `metadata_god` - `v0.5.2+1`
+
+ - **REFACTOR**: use lofty-rs for metadata instead of audiotags ([#21](https://github.com/KRTirtho/metadata_god/issues/21)).
+ - **FIX**: invalid syntax.
+ - **FIX**: rename Image to Picture to resolve name conflict with material Image.
+ - **FIX**: export Image type.
+ - **FIX**: hide internal api getter.
+ - **FIX**: build file release tag version.
+ - **FEAT**: failsafe writing metadata.
+
+
 ## 2023-08-07
 
 ### Changes
