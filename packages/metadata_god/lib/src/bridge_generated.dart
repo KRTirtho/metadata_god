@@ -13,14 +13,16 @@ import 'dart:async';
 import 'package:meta/meta.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'package:uuid/uuid.dart';
-import 'bridge_generated.io.dart' if (dart.library.html) 'bridge_generated.web.dart';
+import 'bridge_generated.io.dart'
+    if (dart.library.html) 'bridge_generated.web.dart';
 
 abstract class MetadataGod {
   Future<Metadata> readMetadata({required String file, dynamic hint});
 
   FlutterRustBridgeTaskConstMeta get kReadMetadataConstMeta;
 
-  Future<void> writeMetadata({required String file, required Metadata metadata, dynamic hint});
+  Future<void> writeMetadata(
+      {required String file, required Metadata metadata, dynamic hint});
 
   FlutterRustBridgeTaskConstMeta get kWriteMetadataConstMeta;
 }
@@ -72,10 +74,12 @@ class Picture {
 
 class MetadataGodImpl implements MetadataGod {
   final MetadataGodPlatform _platform;
-  factory MetadataGodImpl(ExternalLibrary dylib) => MetadataGodImpl.raw(MetadataGodPlatform(dylib));
+  factory MetadataGodImpl(ExternalLibrary dylib) =>
+      MetadataGodImpl.raw(MetadataGodPlatform(dylib));
 
   /// Only valid on web/WASM platforms.
-  factory MetadataGodImpl.wasm(FutureOr<WasmModule> module) => MetadataGodImpl(module as ExternalLibrary);
+  factory MetadataGodImpl.wasm(FutureOr<WasmModule> module) =>
+      MetadataGodImpl(module as ExternalLibrary);
   MetadataGodImpl.raw(this._platform);
   Future<Metadata> readMetadata({required String file, dynamic hint}) {
     var arg0 = _platform.api2wire_String(file);
@@ -86,30 +90,32 @@ class MetadataGodImpl implements MetadataGod {
       constMeta: kReadMetadataConstMeta,
       argValues: [file],
       hint: hint,
-      parseErrorData: parseReturnedError,
     ));
   }
 
-  FlutterRustBridgeTaskConstMeta get kReadMetadataConstMeta => const FlutterRustBridgeTaskConstMeta(
+  FlutterRustBridgeTaskConstMeta get kReadMetadataConstMeta =>
+      const FlutterRustBridgeTaskConstMeta(
         debugName: "read_metadata",
         argNames: ["file"],
       );
 
-  Future<void> writeMetadata({required String file, required Metadata metadata, dynamic hint}) {
+  Future<void> writeMetadata(
+      {required String file, required Metadata metadata, dynamic hint}) {
     var arg0 = _platform.api2wire_String(file);
     var arg1 = _platform.api2wire_box_autoadd_metadata(metadata);
     return _platform.executeNormal(FlutterRustBridgeTask(
-      callFfi: (port_) => _platform.inner.wire_write_metadata(port_, arg0, arg1),
+      callFfi: (port_) =>
+          _platform.inner.wire_write_metadata(port_, arg0, arg1),
       parseSuccessData: _wire2api_unit,
       parseErrorData: _wire2api_FrbAnyhowException,
       constMeta: kWriteMetadataConstMeta,
       argValues: [file, metadata],
       hint: hint,
-      parseErrorData: parseReturnedError,
     ));
   }
 
-  FlutterRustBridgeTaskConstMeta get kWriteMetadataConstMeta => const FlutterRustBridgeTaskConstMeta(
+  FlutterRustBridgeTaskConstMeta get kWriteMetadataConstMeta =>
+      const FlutterRustBridgeTaskConstMeta(
         debugName: "write_metadata",
         argNames: ["file", "metadata"],
       );
@@ -157,7 +163,8 @@ class MetadataGodImpl implements MetadataGod {
 
   Metadata _wire2api_metadata(dynamic raw) {
     final arr = raw as List<dynamic>;
-    if (arr.length != 13) throw Exception('unexpected arr length: expect 13 but see ${arr.length}');
+    if (arr.length != 13)
+      throw Exception('unexpected arr length: expect 13 but see ${arr.length}');
     return Metadata(
       title: _wire2api_opt_String(arr[0]),
       durationMs: _wire2api_opt_box_autoadd_f64(arr[1]),
@@ -206,7 +213,8 @@ class MetadataGodImpl implements MetadataGod {
 
   Picture _wire2api_picture(dynamic raw) {
     final arr = raw as List<dynamic>;
-    if (arr.length != 2) throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
     return Picture(
       mimeType: _wire2api_String(arr[0]),
       data: _wire2api_uint_8_list(arr[1]),
