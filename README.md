@@ -1,3 +1,7 @@
+# 🚨 Repostory Change 🚨
+`metadata_god` has been moved to https://github.com/KRTirtho/frb_plugins/tree/main/packages/metadata_god
+This repo will be archived for historical purposes
+
 # Metadata God
 
 A flutter plugin for retrieving and writing audio tags/metadata from audio files. It supports almost all kind of audio files
